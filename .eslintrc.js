@@ -24,6 +24,7 @@ module.exports = {
   plugins: ['vue', '@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
+    'linebreak-style': ['error', 'unix'],
     semi: ['error', 'never'],
   },
   globals: {
