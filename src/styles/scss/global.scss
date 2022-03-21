@@ -1,1 +1,24 @@
 @import './scrollbar.scss';
+@import './theme.scss';
+
+// flex布局
+@mixin flex($justify-content: center, $align-items: center) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+// 定位
+@mixin relative {
+  position: relative;
+}
+
+// 圆角
+@mixin rounded($pixel: 10px) {
+  border-radius: $pixel;
+}
+
+// 层级
+@mixin z-index($z-index: 0) {
+  z-index: $z-index;
+}

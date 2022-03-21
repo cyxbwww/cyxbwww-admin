@@ -1,3 +1,8 @@
+<!--
+ * @Description 登录背景svg
+ * @Author luomingfeng
+ * @Date 2022/3/21 23:35
+-->
 <template>
   <svg height="1337" width="1337">
     <defs>
@@ -27,8 +32,8 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  startColor: '#28aff0',
-  endColor: '#120fc4',
+  startColor: '#18a058',
+  endColor: '#73bd96',
 })
 </script>
 

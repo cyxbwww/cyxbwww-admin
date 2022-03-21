@@ -1,3 +1,8 @@
+<!--
+ * @Description 登录背景svg
+ * @Author luomingfeng
+ * @Date 2022/3/21 23:36
+-->
 <template>
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -32,8 +37,8 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  startColor: '#28aff0',
-  endColor: '#120fc4',
+  startColor: '#73bd96',
+  endColor: '#18a058',
 })
 </script>
 
