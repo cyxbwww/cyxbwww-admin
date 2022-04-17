@@ -5,19 +5,12 @@
  */
 
 import type { App } from 'vue'
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-
-const routes: RouteRecordRaw[] = [
-  {
-    path: '/',
-    name: 'Login',
-    component: () => import('@/views/common/login/index.vue'),
-  },
-]
+import { createRouter, createWebHistory } from 'vue-router'
+import { constantRoutes } from './constant'
 
 export const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: constantRoutes,
 })
 
 export async function setupRoute(app: App) {
