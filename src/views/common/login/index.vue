@@ -12,21 +12,36 @@
         </header>
         <main>
           <h3 class="text-18px text-primary font-medium">账密登录</h3>
-          <n-form ref="formRef" size="large" :model="model" :rules="rules" :show-label="false">
+          <n-form
+            ref="formRef"
+            size="large"
+            :model="params"
+            :rules="rules"
+            :show-label="false"
+          >
             <n-form-item path="phone">
-              <n-input v-model:value="model.phone" placeholder="请输入手机号码" />
+              <n-input
+                v-model:value="params.phone"
+                placeholder="请输入手机号码"
+              />
             </n-form-item>
             <n-form-item path="password">
               <n-input
-                v-model:value="model.password"
+                v-model:value="params.password"
                 type="password"
                 show-password-on="click"
                 placeholder="请输入密码"
               />
             </n-form-item>
-            <n-button type="primary" size="large" :block="true" :round="true" @click="handleSubmit">
-              确定
-            </n-button>
+            <n-button
+              type="primary"
+              size="large"
+              :block="true"
+              :round="true"
+              :loading="authStore.loading"
+              @click.prevent="handleSubmit"
+              >确定</n-button
+            >
           </n-form>
         </main>
       </div>
@@ -37,34 +52,29 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import { useAuthStore } from '@/store'
 import { FormInst, FormRules } from 'naive-ui'
+import { formRules } from '@/utils'
 import LoginBg from './LoginBg/index.vue'
-import { REGEXP_PHONE, REGEXP_PWD } from '@/config'
 
-const model = reactive({
+const authStore = useAuthStore()
+const { login } = authStore
+const formRef = ref<(HTMLElement & FormInst) | null>(null)
+const params = reactive({
   phone: '',
   password: '',
 })
 const rules: FormRules = {
-  phone: [
-    { required: true, message: '请输入手机号码' },
-    { pattern: REGEXP_PHONE, message: '手机号码格式错误', trigger: 'input' },
-  ],
-  password: [
-    { required: true, message: '请输入密码' },
-    { pattern: REGEXP_PWD, message: '密码为8-18位数字/字符/符号，至少2种组合', trigger: 'input' },
-  ],
+  phone: formRules.phone,
+  password: formRules.password,
 }
-const formRef = ref<(HTMLElement & FormInst) | null>(null)
 
-function handleSubmit(e: MouseEvent) {
+function handleSubmit() {
   if (!formRef.value) return
-  e.preventDefault()
 
   formRef.value.validate((errors) => {
     if (!errors) {
-      // todo
-      console.log('登录')
+      login(params)
     }
   })
 }
