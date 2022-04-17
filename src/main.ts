@@ -5,7 +5,7 @@
  */
 
 import { createApp } from 'vue'
-import { setupAssets, setupNaiveUI } from '@/plugins'
+import { setupAssets } from '@/plugins'
 import { setupRoute } from '@/router'
 import { setupStore } from '@/store'
 import App from './App.vue'
@@ -18,9 +18,6 @@ async function setupApp() {
 
   // 挂载pinia状态
   setupStore(app)
-
-  // 按需引入naiveUI
-  setupNaiveUI(app)
 
   // 挂载路由
   await setupRoute(app)
