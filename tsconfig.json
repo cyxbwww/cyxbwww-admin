@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
+      "~/*": ["./*"],
       "@/*": ["./src/*"]
     },
+    "types": ["node","naive-ui/volar"],
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -13,7 +15,22 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"]
+    "lib": [
+      "esnext",
+      "dom"
+    ]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"]
+  "include": [
+    "src/typings/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "vite.config.*",
+    ".env-config.ts",
+    "components.d.ts"
+  ],
+  "exclude": [
+    "/dist/**",
+    "node_modules"
+  ]
 }

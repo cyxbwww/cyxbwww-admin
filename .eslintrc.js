@@ -14,7 +14,7 @@ module.exports = {
     'prettier',
   ],
   parserOptions: {
-    ecmaVersion: 12,
+    ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
   },
@@ -23,6 +23,7 @@ module.exports = {
     'prettier/prettier': 'error',
     'linebreak-style': ['error', 'unix'],
     semi: ['error', 'never'],
+    quotes: ['error', 'single'],
   },
   globals: {
     defineProps: 'readonly',
