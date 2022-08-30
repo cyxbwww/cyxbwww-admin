@@ -1,8 +1,28 @@
 module.exports = {
-  tabWidth: 2,
-  jsxSingleQuote: true,
-  jsxBracketSameLine: true,
+  // https://prettier.io/docs/en/options.html
+  arrowParens: 'avoid',
+  bracketSameLine: false,
+  bracketSpacing: true,
+  embeddedLanguageFormatting: 'auto',
+  htmlWhitespaceSensitivity: 'css',
+  insertPragma: false,
+  jsxSingleQuote: false,
+  printWidth: 120,
+  proseWrap: 'preserve',
+  quoteProps: 'as-needed',
+  requirePragma: false,
+  semi: true,
   singleQuote: true,
-  semi: false,
-  arrowParens: 'always',
-}
+  tabWidth: 2,
+  trailingComma: 'none',
+  useTabs: false,
+  vueIndentScriptAndStyle: false,
+  overrides: [
+    {
+      files: '*.html',
+      options: {
+        parser: 'html'
+      }
+    }
+  ]
+};

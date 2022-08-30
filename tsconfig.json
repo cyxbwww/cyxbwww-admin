@@ -1,36 +1,37 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": ".", // 解析非相对模块的基地址，默认是当前目录
     "paths": {
+      // 路径映射，相对于baseUrl
       "~/*": ["./*"],
       "@/*": ["./src/*"]
     },
-    "types": ["node","naive-ui/volar"],
-    "target": "esnext",
-    "useDefineForClassFields": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
-    "jsx": "preserve",
-    "sourceMap": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
+    "types": ["vite/client", "node", "unplugin-icons/types/vue", "naive-ui/volar"], // 加载的声明文件包
+    "target": "esnext", // 目标语言的版本
+    "module": "esnext", // 生成代码的模板标准
+    "moduleResolution": "node", // 模块解析策略，ts 默认用 node 的解析策略，即相对的方式导入
+    "strict": true, // 开启所有严格的类型检查
+    "sourceMap": true, // 成目标文件的 sourceMap 文件
+    "esModuleInterop": true, // 允许 export 导出，由 import 导入
+    "resolveJsonModule": true, // 允许导入 json 模块
     "lib": [
+      // TS需要引用的库
       "esnext",
       "dom"
     ]
   },
   "include": [
+    // 指定需要编译的文件或文件夹
     "src/typings/*.d.ts",
     "src/**/*.ts",
     "src/**/*",
     "src/**/*.vue",
     "vite.config.*",
-    ".env-config.ts",
-    "components.d.ts"
+    ".env-config.ts"
   ],
   "exclude": [
-    "/dist/**",
+    // 指定需要排除编译的文件或文件夹
+    "dist",
     "node_modules"
   ]
 }

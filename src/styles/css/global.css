@@ -1,26 +1,7 @@
+@import './reset.css';
 @import './transition.css';
-
 html,
 body,
 #app {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-.relative {
-  position: relative;
-}
-
-.wh-full {
-  width: 100%;
-  height: 100%;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.h-full {
   height: 100%;
 }

@@ -1,20 +1,15 @@
-import { RouteRecordRaw } from 'vue-router'
+import { error } from '@/router/constant/error';
+import { auth } from '@/router/constant/auth';
 
-export const constantRoutes: Array<RouteRecordRaw> = [
+export const constantRoutes: AuthRoute.Route[] = [
   {
     name: 'root',
     path: '/',
-    redirect: '/dasboard',
+    redirect: '/dashboard',
     meta: {
-      title: 'Root',
-    },
+      title: 'Root'
+    }
   },
-  {
-    name: 'login',
-    path: '/login',
-    component: () => import('@/views/common/login/index.vue'),
-    meta: {
-      title: '登录',
-    },
-  },
-]
+  ...error,
+  ...auth
+];

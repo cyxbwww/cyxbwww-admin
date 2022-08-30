@@ -1,2 +1,5 @@
 node_modules
 dist
+
+components.d.ts
+auto-imports.d.ts

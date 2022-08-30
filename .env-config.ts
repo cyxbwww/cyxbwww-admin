@@ -6,36 +6,33 @@
 type ServiceEnv = Record<
   EnvType,
   {
-    /** 请求地址 */
-    url: string
-    /** 代理地址 */
-    proxy: string
+    // 请求地址
+    url: string;
+    // 代理地址
+    proxy: string;
   }
->
+>;
 
-/** 环境配置 */
+// 环境配置
 const serviceEnvConfig: ServiceEnv = {
   dev: {
     url: 'http://localhost:7001',
-    proxy: '/api',
+    proxy: '/api'
   },
   test: {
     url: 'http://localhost:7001',
-    proxy: '/api',
+    proxy: '/api'
   },
   prod: {
     url: 'http://localhost:7001',
-    proxy: '/api',
-  },
-}
-
-/**
- * 获取环境配置
- * @param env 环境描述
- */
-export function getEnvConfig(env: ImportMetaEnv) {
-  const { VITE_ENV_TYPE = 'dev' } = env
-  return {
-    http: serviceEnvConfig[VITE_ENV_TYPE],
+    proxy: '/api'
   }
+};
+
+// 获取环境配置
+export function getEnvConfig(env: ImportMetaEnv) {
+  const { VITE_ENV_TYPE = 'dev' } = env;
+  return {
+    http: serviceEnvConfig[VITE_ENV_TYPE]
+  };
 }
