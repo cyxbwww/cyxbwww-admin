@@ -19,9 +19,9 @@ export default class CustomAxiosInstance {
   constructor(
     axiosConfig: AxiosRequestConfig,
     backendConfig: Service.BackendResultConfig = {
-      codeKey: 'resultCode',
-      dataKey: 'content',
-      msgKey: 'errorMsg',
+      codeKey: 'code',
+      dataKey: 'data',
+      msgKey: 'message',
       successCode: 0
     }
   ) {
