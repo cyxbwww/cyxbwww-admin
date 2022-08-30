@@ -11,5 +11,5 @@ const isHttpProxy = import.meta.env.VITE_HTTP_PROXY === 'true';
 
 export const request = createRequest({
   baseURL: isHttpProxy ? http.proxy : http.url,
-  timeout: 1000
+  timeout: 60000
 });
