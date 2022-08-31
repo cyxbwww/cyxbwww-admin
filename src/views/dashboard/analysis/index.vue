@@ -1,9 +1,9 @@
 <!--
- * @Description 首页
+ * @Description 页面说明
  * @Author luomingfeng
- * @Date 2022/5/13 15:46
+ * @Date 2022/8/31 21:53
 -->
-<template>dashboard</template>
+<template>analysis</template>
 
 <script setup lang="ts"></script>
 

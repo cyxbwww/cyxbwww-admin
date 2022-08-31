@@ -7,7 +7,7 @@ import {
   transformAuthRoutesToVueRoutes,
   transformAuthRoutesToSearchMenus
 } from '@/utils';
-// import { fetchUserRoutes } from '@/service/api';
+import { fetchUserRoutes } from '@/service/api';
 
 interface RouteState {
   /**
@@ -50,12 +50,12 @@ export const useRouteStore = defineStore('route-store', {
     },
     // 初始化动态路由
     async initDynamicRoute(router: Router) {
-      // todo
-      // const { data } = await fetchUserRoutes()
-      // if (data) {
-      //   this.routeHomeName = data.home
-      //   this.handleAuthRoutes(data.routes, router)
-      // }
+      const { userId } = getUserInfo();
+      const { data } = await fetchUserRoutes(userId);
+      if (data) {
+        this.routeHomeName = data.home;
+        this.handleAuthRoutes(data.routes, router);
+      }
     },
     // 初始化静态路由
     async initStaticRoute(router: Router) {

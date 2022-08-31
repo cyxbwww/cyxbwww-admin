@@ -60,10 +60,7 @@ function handleSubmit() {
   formRef.value.validate(errors => {
     if (errors) return;
     const { username, password } = model;
-    login({
-      username: username,
-      password: password
-    });
+    login(username, password);
   });
 }
 </script>

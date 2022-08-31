@@ -1,17 +1,11 @@
 import { request } from '@/service/request';
 
 // 登录
-export async function fetchLogin(data: object) {
-  return request.post('/user/login', data);
+export async function fetchLogin(username: string, password: string) {
+  return request.post<ApiAuth.UserInfo>('/user/login', { username, password });
 }
 
 // 用户路由
-export async function fetchUserRoutes(data: object) {
-  return request.post('/user/menu', data);
-}
-
-// 发送验证码
-export async function fetchSmsCode(userId: number | string) {
-  console.log(userId);
-  return request.post('/user/login');
+export async function fetchUserRoutes(userId: string) {
+  return request.post<ApiRoute.Route>('/user/getUserRoutes', { userId });
 }

@@ -6,12 +6,12 @@ export function useRouterPush(inSetup = true) {
   const route = globalRouter.currentRoute;
 
   // 路由跳转
-  async function routerPush(to: RouteLocationRaw, newTab = false) {
+  function routerPush(to: RouteLocationRaw, newTab = false) {
     if (newTab) {
       const routerData = router.resolve(to);
       window.open(routerData.href, '_blank');
     } else {
-      await router.push(to);
+      router.push(to);
     }
   }
 
@@ -21,23 +21,23 @@ export function useRouterPush(inSetup = true) {
   }
 
   // 跳转首页
-  async function toHome(newTab = false) {
-    await routerPush({ name: 'root' }, newTab);
+  function toHome(newTab = false) {
+    routerPush({ name: 'root' }, newTab);
   }
 
   // 登录页切换其他模块
-  async function toLoginModule(module: EnumType.LoginModuleKey) {
+  function toLoginModule(module: EnumType.LoginModuleKey) {
     const { query } = route.value;
-    await routerPush({ name: routeName('login'), params: { module }, query });
+    routerPush({ name: routeName('login'), params: { module }, query });
   }
 
   // 登录成功后跳转重定向的地址
-  async function toLoginRedirect() {
+  function toLoginRedirect() {
     const { query } = route.value;
     if (query?.redirect) {
-      await routerPush(query.redirect as string);
+      routerPush(query.redirect as string);
     } else {
-      await toHome();
+      toHome();
     }
   }
 

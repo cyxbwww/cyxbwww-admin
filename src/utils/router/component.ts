@@ -1,7 +1,7 @@
 import type { Component } from 'vue';
 import { EnumLayoutComponentName } from '@/enum';
 import { views } from '@/views';
-import { BasicLayout, BlankLayout } from '@/components/layouts';
+import { BasicLayout, BlankLayout } from '@/layouts';
 
 type LayoutComponent = Record<EnumType.LayoutComponentName, () => Promise<Component>>;
 
