@@ -13,7 +13,9 @@ declare namespace AuthRoute {
     // 捕获无效 path 的路由
     | 'not-found-page'
     // 自定义的路由
-    | 'dashboard';
+    | 'dashboard'
+    | 'dashboard_analysis'
+    | 'dashboard_workbench';
 
   // 路由路径
   type RoutePath =
@@ -42,7 +44,7 @@ declare namespace AuthRoute {
     // 作为单级路由的父级路由布局组件
     singleLayout?: Extract<RouteComponent, 'basic' | 'blank'>;
     // 访问路由权限
-    permissions?: Auth.IdentityType[];
+    permissions?: Auth.RoleType[];
     // 缓存页面
     keepAlive?: boolean;
     // 菜单和面包屑对应的图标

@@ -11,7 +11,7 @@ import unplugin from './unplugin';
 export function setupVitePlugins(viteEnv: ImportMetaEnv): (PluginOption | PluginOption[])[] {
   const plugins = [vue, ...unplugin(), unocss];
 
-  if (viteEnv.VITE_VISUALIZER === 'true') {
+  if (viteEnv.VITE_VISUALIZER === 'Y') {
     plugins.push(visualizer);
   }
 
