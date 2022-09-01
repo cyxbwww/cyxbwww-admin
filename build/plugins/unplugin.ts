@@ -1,9 +1,11 @@
+import DefineOptions from 'unplugin-vue-define-options/vite';
 import Components from 'unplugin-vue-components/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 
 export default () => {
   return [
+    DefineOptions(),
     AutoImport({
       dts: './src/typings/auto-imports.d.ts',
       imports: ['vue', 'vue-router', 'pinia'],

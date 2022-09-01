@@ -6,7 +6,7 @@
       "~/*": ["./*"],
       "@/*": ["./src/*"]
     },
-    "types": ["vite/client", "node", "unplugin-icons/types/vue", "naive-ui/volar"], // 加载的声明文件包
+    "types": ["vite/client", "node", "unplugin-icons/types/vue", "naive-ui/volar", "unplugin-vue-define-options/macros-global"], // 加载的声明文件包
     "target": "esnext", // 目标语言的版本
     "module": "esnext", // 生成代码的模板标准
     "moduleResolution": "node", // 模块解析策略，ts 默认用 node 的解析策略，即相对的方式导入
