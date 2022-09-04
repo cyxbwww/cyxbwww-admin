@@ -3,6 +3,9 @@
     <header class="basic-layout__header">
       <global-header />
     </header>
+    <div class="basic-layout__tab">
+      <global-tab />
+    </div>
     <aside class="basic-layout__sider">
       <global-sider />
     </aside>
@@ -16,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { GlobalFooter, GlobalContent, GlobalHeader, GlobalSider } from '../common';
+import { GlobalFooter, GlobalContent, GlobalHeader, GlobalSider, GlobalTab } from '../common';
 </script>
 <style lang="scss" scoped>
 .basic-layout {
@@ -27,6 +30,7 @@ import { GlobalFooter, GlobalContent, GlobalHeader, GlobalSider } from '../commo
 
   &__header {
     position: fixed;
+    z-index: 1001;
     left: 0;
     top: 0;
     flex-shrink: 0;
@@ -37,8 +41,21 @@ import { GlobalFooter, GlobalContent, GlobalHeader, GlobalSider } from '../commo
     transition-property: padding-left;
   }
 
+  &__tab {
+    position: fixed;
+    z-index: 999;
+    top: 56px;
+    left: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 44px;
+    padding-left: 220px;
+  }
+
   &__sider {
     position: fixed;
+    z-index: 1003;
     top: 0;
     left: 0;
     bottom: 0;
@@ -57,6 +74,7 @@ import { GlobalFooter, GlobalContent, GlobalHeader, GlobalSider } from '../commo
 
   &__footer {
     position: static;
+    z-index: 998;
     left: 0;
     bottom: 0;
     flex-shrink: 0;

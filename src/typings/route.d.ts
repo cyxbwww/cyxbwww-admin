@@ -5,17 +5,20 @@ declare namespace AuthRoute {
   // 路由key
   type RouteKey =
     // 固定的路由
-    | 'root'
+    | 'root' // 根路由
     | 'login'
     | 'no-permission'
     | 'not-found'
     | 'service-error'
-    // 捕获无效 path 的路由
-    | 'not-found-page'
+    | 'not-found-page' // 捕获无效 path 的路由
     // 自定义的路由
     | 'dashboard'
     | 'dashboard_analysis'
     | 'dashboard_workbench'
+    | 'exception'
+    | 'exception_403'
+    | 'exception_404'
+    | 'exception_500'
     | 'management'
     | 'management_menu'
     | 'management_role'
@@ -53,6 +56,8 @@ declare namespace AuthRoute {
     keepAlive?: boolean;
     // 菜单和面包屑对应的图标
     icon?: string;
+    // 自定义的菜单和面包屑对应的图标
+    customIcon?: string;
     // 是否在菜单中隐藏
     hide?: boolean;
     // 外链链接
