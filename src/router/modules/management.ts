@@ -37,7 +37,7 @@ const management: AuthRoute.Route = {
   meta: {
     title: '系统管理',
     icon: 'carbon:cloud-service-management',
-    order: 2
+    order: 3
   }
 };
 
