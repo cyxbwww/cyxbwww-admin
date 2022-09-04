@@ -1,12 +1,16 @@
 import type { Router } from 'vue-router';
 import { defineStore } from 'pinia';
-import { routes as staticRoutes } from '@/router';
+import { ROOT_ROUTE, router, routes as staticRoutes } from '@/router';
+import { useAuthStore, useTabStore } from '@/store';
 import {
   getUserInfo,
   transformAuthRouteToMenu,
   transformAuthRoutesToVueRoutes,
-  transformAuthRoutesToSearchMenus
+  transformAuthRoutesToSearchMenus,
+  transformRouteNameToRoutePath,
+  transformAuthRouteToVueRoute
 } from '@/utils';
+import { filterAuthRoutesByUserPermission } from '@/utils';
 import { fetchUserRoutes } from '@/service/api';
 
 interface RouteState {
@@ -39,7 +43,7 @@ export const useRouteStore = defineStore('route-store', {
   }),
   actions: {
     // 处理权限路由
-    handleAuthRoutes(routes: AuthRoute.Route[], router: Router) {
+    handleAuthRoutes(routes: AuthRoute.Route[]) {
       this.menus = transformAuthRouteToMenu(routes);
       this.searchMenus = transformAuthRoutesToSearchMenus(routes);
 
@@ -48,31 +52,48 @@ export const useRouteStore = defineStore('route-store', {
         router.addRoute(route);
       });
     },
+    // 动态路由模式下：更新根路由的重定向
+    handleUpdateRootRedirect(routeKey: AuthRoute.RouteKey) {
+      if (routeKey === 'root' || routeKey === 'not-found-page') {
+        throw new Error('routeKey的值不能为root或者not-found-page');
+      }
+      const rootRoute: AuthRoute.Route = { ...ROOT_ROUTE, redirect: transformRouteNameToRoutePath(routeKey) };
+      const rootRouteName: AuthRoute.RouteKey = 'root';
+      router.removeRoute(rootRouteName);
+      const rootVueRoute = transformAuthRouteToVueRoute(rootRoute)[0];
+      router.addRoute(rootVueRoute);
+    },
     // 初始化动态路由
-    async initDynamicRoute(router: Router) {
+    async initDynamicRoute() {
       const { userId } = getUserInfo();
       const { data } = await fetchUserRoutes(userId);
       if (data) {
         this.routeHomeName = data.home;
-        this.handleAuthRoutes(data.routes, router);
+        this.handleUpdateRootRedirect(data.home);
+        this.handleAuthRoutes(data.routes);
       }
     },
     // 初始化静态路由
-    async initStaticRoute(router: Router) {
-      // 先根据用户权限过滤一下staticRoutes
-      this.handleAuthRoutes(staticRoutes, router);
+    async initStaticRoute() {
+      const auth = useAuthStore();
+      const routes = filterAuthRoutesByUserPermission(staticRoutes, auth.userInfo.userRole);
+      this.handleAuthRoutes(routes);
     },
     // 初始化权限路由
-    async initAuthRoute(router: Router) {
+    async initAuthRoute() {
+      const { initHomeTab } = useTabStore();
       const { userId } = getUserInfo();
+
       if (!userId) return;
 
       const isDynamicRoute = this.authRouteMode === 'dynamic';
       if (isDynamicRoute) {
-        await this.initDynamicRoute(router);
+        await this.initDynamicRoute();
       } else {
-        await this.initStaticRoute(router);
+        await this.initStaticRoute();
       }
+
+      initHomeTab(this.routeHomeName, router);
 
       this.isInitedAuthRoute = true;
     }

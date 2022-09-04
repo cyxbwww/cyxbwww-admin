@@ -26,7 +26,7 @@ export async function createDynamicRouteGuard(
       return false;
     }
 
-    await route.initAuthRoute(router);
+    await route.initAuthRoute();
 
     if (to.name === routeName('not-found-page')) {
       // 动态路由没有加载导致被not-found-page路由捕获，等待权限路由加载好了，回到之前的路由

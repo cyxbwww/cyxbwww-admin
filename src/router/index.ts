@@ -7,7 +7,7 @@ import type { App } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import { transformAuthRoutesToVueRoutes } from '@/utils';
 import { createRouterGuard } from './guard';
-import { constantRoutes } from './constant';
+import { constantRoutes } from './routes';
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -23,5 +23,5 @@ export async function setupRoute(app: App) {
 // 路由名称
 export const routeName = (key: AuthRoute.RouteKey) => key;
 
-export * from './constant';
+export * from './routes';
 export * from './modules';

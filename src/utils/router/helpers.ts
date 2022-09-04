@@ -7,6 +7,32 @@ export function transformAuthRoutesToVueRoutes(routes: AuthRoute.Route[]) {
   return routes.map(route => transformAuthRouteToVueRoute(route)).flat(1);
 }
 
+// 将路由名字转换成路由路径
+export function transformRouteNameToRoutePath(
+  name: Exclude<AuthRoute.RouteKey, 'not-found-page'>
+): AuthRoute.RoutePath {
+  const rootPath: AuthRoute.RoutePath = '/';
+  if (name === 'root') return rootPath;
+
+  const splitMark: AuthRoute.RouteSplitMark = '_';
+  const pathSplitMark = '/';
+  const path = name.split(splitMark).join(pathSplitMark);
+
+  return (pathSplitMark + path) as AuthRoute.RoutePath;
+}
+
+// 将路由路径转换成路由名字
+export function transformRoutePathToRouteName(
+  path: Exclude<AuthRoute.RoutePath, '/not-found-page' | '/:pathMatch(.*)*'>
+): AuthRoute.RouteKey {
+  if (path === '/') return 'root';
+
+  const pathSplitMark = '/';
+  const routeSplitMark: AuthRoute.RouteSplitMark = '_';
+
+  return path.split(pathSplitMark).slice(1).join(routeSplitMark) as AuthRoute.RouteKey;
+}
+
 // 将单个权限路由转换成vue路由
 export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
   const resultRoute: RouteRecordRaw[] = [];

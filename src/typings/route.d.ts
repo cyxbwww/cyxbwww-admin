@@ -15,7 +15,11 @@ declare namespace AuthRoute {
     // 自定义的路由
     | 'dashboard'
     | 'dashboard_analysis'
-    | 'dashboard_workbench';
+    | 'dashboard_workbench'
+    | 'management'
+    | 'management_menu'
+    | 'management_role'
+    | 'management_user';
 
   // 路由路径
   type RoutePath =
