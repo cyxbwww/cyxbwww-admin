@@ -14,6 +14,7 @@ export default defineConfig(configEnv => {
   const srcPath = getSrcPath();
 
   return {
+    base: viteEnv.VITE_BASE_URL,
     server: {
       host: '0.0.0.0',
       port: 8888,

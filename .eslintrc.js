@@ -22,6 +22,7 @@ module.exports = {
     '@vue/typescript/recommended'
   ],
   settings: {
+    'import/core-modules': ['uno.css', '~icons/*', 'virtual:svg-icons-register'],
     'import/resolver': {
       alias: {
         map: [
