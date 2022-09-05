@@ -1,6 +1,6 @@
 <template>
   <dark-mode-container>
-    <h1 class="text-18px text-primary font-bold">博客管理后台</h1>
+    <h1 v-if="!app.siderCollapse" class="text-18px text-primary font-bold">博客管理后台</h1>
     <n-scrollbar class="flex-1-hidden">
       <n-menu
         :value="activeKey"

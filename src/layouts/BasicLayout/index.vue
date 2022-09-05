@@ -1,25 +1,28 @@
 <template>
   <div class="basic-layout">
-    <header class="basic-layout__header">
+    <header class="basic-layout__header" :class="{ min: app.siderCollapse }">
       <global-header />
     </header>
-    <div class="basic-layout__tab">
+    <div class="basic-layout__tab" :class="{ min: app.siderCollapse }">
       <global-tab />
     </div>
-    <aside class="basic-layout__sider">
+    <aside class="basic-layout__sider" :class="{ min: app.siderCollapse }">
       <global-sider />
     </aside>
-    <main class="basic-layout__content">
+    <main class="basic-layout__content" :class="{ min: app.siderCollapse }">
       <global-content />
     </main>
-    <footer class="basic-layout__footer">
+    <footer class="basic-layout__footer" :class="{ min: app.siderCollapse }">
       <global-footer />
     </footer>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useAppStore } from '@/store';
 import { GlobalFooter, GlobalContent, GlobalHeader, GlobalSider, GlobalTab } from '../common';
+
+const app = useAppStore();
 </script>
 <style lang="scss" scoped>
 .basic-layout {
@@ -39,6 +42,10 @@ import { GlobalFooter, GlobalContent, GlobalHeader, GlobalSider, GlobalTab } fro
     width: 100%;
     height: 56px;
     transition-property: padding-left;
+
+    &.min {
+      padding-left: 56px;
+    }
   }
 
   &__tab {
@@ -51,6 +58,10 @@ import { GlobalFooter, GlobalContent, GlobalHeader, GlobalSider, GlobalTab } fro
     width: 100%;
     height: 44px;
     padding-left: 220px;
+
+    &.min {
+      padding-left: 56px;
+    }
   }
 
   &__sider {
@@ -61,6 +72,10 @@ import { GlobalFooter, GlobalContent, GlobalHeader, GlobalSider, GlobalTab } fro
     bottom: 0;
     width: 220px;
     box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
+
+    &.min {
+      width: 56px;
+    }
   }
 
   &__content {
@@ -70,6 +85,10 @@ import { GlobalFooter, GlobalContent, GlobalHeader, GlobalSider, GlobalTab } fro
     box-sizing: border-box;
     transition-property: padding-left;
     overflow: visible;
+
+    &.min {
+      padding-left: 56px;
+    }
   }
 
   &__footer {
@@ -81,6 +100,10 @@ import { GlobalFooter, GlobalContent, GlobalHeader, GlobalSider, GlobalTab } fro
     padding-left: 220px;
     width: 100%;
     height: 48px;
+
+    &.min {
+      padding-left: 56px;
+    }
   }
 }
 </style>
