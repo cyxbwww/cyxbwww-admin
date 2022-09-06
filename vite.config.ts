@@ -15,23 +15,30 @@ export default defineConfig(configEnv => {
 
   return {
     base: viteEnv.VITE_BASE_URL,
-    server: {
-      host: '0.0.0.0',
-      port: 8888,
-      proxy: createViteProxy(viteEnv)
-    },
-    plugins: setupVitePlugins(viteEnv),
     resolve: {
       alias: {
         '~': rootPath,
         '@': srcPath
       }
     },
+    plugins: setupVitePlugins(viteEnv),
     css: {
       preprocessorOptions: {
         scss: {
           additionalData: '@use "@/styles/scss/global.scss" as *;'
         }
+      }
+    },
+    server: {
+      host: '0.0.0.0',
+      port: 8888,
+      proxy: createViteProxy(viteEnv)
+    },
+    build: {
+      reportCompressedSize: false,
+      sourcemap: false,
+      commonjsOptions: {
+        ignoreTryCatch: false
       }
     }
   };

@@ -37,7 +37,7 @@ export default () => {
       dts: './src/typings/components.d.ts',
       dirs: ['src/components'],
       types: [{ from: 'vue-router', names: ['RouterLink', 'RouterView'] }],
-      resolvers: [NaiveUiResolver()]
+      resolvers: [NaiveUiResolver(), IconsResolver({ customCollections: ['custom'], componentPrefix: 'icon' })]
     }),
     createSvgIconsPlugin({
       iconDirs: [customIconPath],

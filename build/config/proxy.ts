@@ -8,8 +8,9 @@ import type { ProxyOptions } from 'vite';
 import { getEnvConfig } from '../../.env-config';
 
 export function createViteProxy(viteEnv: ImportMetaEnv) {
-  const { http } = getEnvConfig(viteEnv);
+  if (viteEnv.VITE_HTTP_PROXY === 'N') return undefined;
 
+  const { http } = getEnvConfig(viteEnv);
   const proxy: Record<string, string | ProxyOptions> = {
     [http.proxy]: {
       target: http.url,
