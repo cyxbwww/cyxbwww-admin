@@ -1,7 +1,7 @@
 {
   "name": "vue-blog-manager",
-  "private": true,
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "cross-env VITE_ENV_TYPE=dev vite",
     "dev:test": "cross-env VITE_ENV_TYPE=test vite",
@@ -16,6 +16,7 @@
     "commit": "git-cz"
   },
   "dependencies": {
+    "@cyxbwww/basic-layout": "^0.0.5",
     "axios": "^0.27.2",
     "colord": "^2.9.3",
     "crypto-js": "^4.1.1",
