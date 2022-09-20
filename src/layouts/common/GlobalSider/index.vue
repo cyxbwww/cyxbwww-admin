@@ -1,6 +1,6 @@
 <template>
-  <dark-mode-container>
-    <router-link :to="routeHomePath" class="flex-y-center w-full nowrap-hidden pt-14px pl-14px">
+  <dark-mode-container class="global-sider flex-col-stretch h-full">
+    <router-link :to="routeHomePath" class="flex-center w-full nowrap-hidden pt-14px" :class="{ 'is-left': showTitle }">
       <n-avatar round src="/src/assets/img/logo.png" />
       <h2 v-show="showTitle" class="pl-8px text-16px transition duration-300 ease-in-out">博客管理后台</h2>
     </router-link>
@@ -52,8 +52,11 @@ function handleUpdateExpandedKeys(keys: string[]) {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  padding: 10px 16px 6px;
-  cursor: pointer;
+.global-sider {
+  box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
+
+  .is-left {
+    margin-left: -28px;
+  }
 }
 </style>
