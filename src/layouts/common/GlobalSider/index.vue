@@ -1,6 +1,9 @@
 <template>
   <dark-mode-container>
-    <h1 v-if="!app.siderCollapse" class="text-18px text-primary font-bold">博客管理后台</h1>
+    <router-link :to="routeHomePath" class="flex-y-center w-full nowrap-hidden pt-14px pl-14px">
+      <n-avatar round src="/src/assets/img/logo.png" />
+      <h2 v-show="showTitle" class="pl-8px text-16px transition duration-300 ease-in-out">博客管理后台</h2>
+    </router-link>
     <n-scrollbar class="flex-1-hidden">
       <n-menu
         :value="activeKey"
@@ -20,6 +23,7 @@
 
 <script setup lang="ts">
 import type { MenuOption } from 'naive-ui';
+import { routePath } from '@/router';
 import { useAppStore, useRouteStore, useThemeStore } from '@/store';
 import { useRouterPush } from '@/composables';
 
@@ -28,6 +32,9 @@ const app = useAppStore();
 const theme = useThemeStore();
 const routeStore = useRouteStore();
 const { routerPush } = useRouterPush();
+const routeHomePath = routePath('root');
+
+const showTitle = computed(() => !app.siderCollapse && theme.layout.mode !== 'vertical-mix');
 
 const menus = computed(() => routeStore.menus as GlobalMenuOption[]);
 
