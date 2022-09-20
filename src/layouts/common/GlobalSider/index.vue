@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import type { MenuOption } from 'naive-ui';
 import { useAppStore, useRouteStore, useThemeStore } from '@/store';
-import { useRouterPush } from '@/utils';
+import { useRouterPush } from '@/composables';
 
 const route = useRoute();
 const app = useAppStore();

@@ -38,7 +38,8 @@
 import type { FormInst, FormRules } from 'naive-ui';
 import { EnumLoginModule } from '@/enum';
 import { useAuthStore } from '@/store';
-import { useRouterPush, formRules } from '@/utils';
+import { formRules } from '@/utils';
+import { useRouterPush } from '@/composables';
 
 const authStore = useAuthStore();
 const { login } = authStore;

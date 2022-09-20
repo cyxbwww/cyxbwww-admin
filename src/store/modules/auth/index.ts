@@ -6,7 +6,8 @@
 
 import { router as globalRouter } from '@/router';
 import { routeName } from '@/router';
-import { setUserInfo, setToken, getUserInfo, getToken, clearAuthStorage, useRouterPush } from '@/utils';
+import { setUserInfo, setToken, getUserInfo, getToken, clearAuthStorage } from '@/utils';
+import { useRouterPush } from '@/composables';
 import { fetchLogin } from '@/service/api';
 
 interface AuthState {
