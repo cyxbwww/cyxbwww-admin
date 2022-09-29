@@ -8,7 +8,8 @@ import {
   transformAuthRoutesToVueRoutes,
   transformAuthRoutesToSearchMenus,
   transformRouteNameToRoutePath,
-  transformAuthRouteToVueRoute
+  transformAuthRouteToVueRoute,
+  transformRoutePathToRouteName
 } from '@/utils';
 import { filterAuthRoutesByUserPermission } from '@/utils';
 import { fetchUserRoutes } from '@/service/api';
@@ -21,7 +22,7 @@ interface RouteState {
    */
   authRouteMode: ImportMetaEnv['VITE_AUTH_ROUTE_MODE'];
   // 是否初始化了权限路由
-  isInitedAuthRoute: boolean;
+  isInitAuthRoute: boolean;
   // 路由首页name(前端静态路由时生效，后端动态路由该值会被后端返回的值覆盖)
   routeHomeName: AuthRoute.RouteKey;
   // 菜单
@@ -35,8 +36,8 @@ interface RouteState {
 export const useRouteStore = defineStore('route-store', {
   state: (): RouteState => ({
     authRouteMode: import.meta.env.VITE_AUTH_ROUTE_MODE,
-    isInitedAuthRoute: false,
-    routeHomeName: 'dashboard',
+    isInitAuthRoute: false,
+    routeHomeName: transformRoutePathToRouteName(import.meta.env.VITE_ROUTE_HOME_PATH),
     menus: [],
     searchMenus: [],
     cacheRoutes: []
@@ -95,7 +96,7 @@ export const useRouteStore = defineStore('route-store', {
 
       initHomeTab(this.routeHomeName, router);
 
-      this.isInitedAuthRoute = true;
+      this.isInitAuthRoute = true;
     }
   }
 });
