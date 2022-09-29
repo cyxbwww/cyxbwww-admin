@@ -1,7 +1,6 @@
 <template>
   <basic-layout
     :mode="mode"
-    :is-mobile="isMobile"
     :fixed-header-and-tab="theme.fixedHeaderAndTab"
     :header-height="theme.header.height"
     :tab-visible="theme.tab.visible"
@@ -42,7 +41,7 @@ defineOptions({ name: 'BasicLayout' });
 const app = useAppStore();
 const theme = useThemeStore();
 
-const { mode, isMobile, siderVisible, siderWidth, siderCollapsedWidth } = useBasicLayout();
+const { mode, siderVisible, siderWidth, siderCollapsedWidth } = useBasicLayout();
 const { bool: addMainOverflowHidden, setBool: setAddMainOverflowHidden } = useBoolean();
 </script>
 <style lang="scss" scoped></style>

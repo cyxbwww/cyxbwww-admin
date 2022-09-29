@@ -238,6 +238,16 @@ declare namespace Service {
   }
 }
 
+// 面包屑
+type GlobalBreadcrumb = import('naive-ui').DropdownOption & {
+  key: string;
+  label: string;
+  disabled: boolean;
+  routeName: string;
+  hasChildren: boolean;
+  children?: GlobalBreadcrumb[];
+};
+
 // 多页签Tab的路由
 interface GlobalTabRoute
   extends Pick<import('vue-router').RouteLocationNormalizedLoaded, 'name' | 'fullPath' | 'meta'> {
