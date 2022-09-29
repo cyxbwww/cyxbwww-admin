@@ -1,9 +1,6 @@
 <template>
   <dark-mode-container class="global-sider flex-col-stretch h-full">
-    <router-link :to="routeHomePath" class="flex-center w-full nowrap-hidden pt-14px" :class="{ 'is-left': showTitle }">
-      <n-avatar round src="/src/assets/img/logo.png" />
-      <h2 v-show="showTitle" class="pl-8px text-16px transition duration-300 ease-in-out">博客管理后台</h2>
-    </router-link>
+    <global-logo v-if="!isHorizontalMix" :show-title="showTitle" :style="{ height: theme.header.height + 'px' }" />
     <n-scrollbar class="flex-1-hidden">
       <n-menu
         :value="activeKey"
@@ -23,19 +20,20 @@
 
 <script setup lang="ts">
 import type { MenuOption } from 'naive-ui';
-import { routePath } from '@/router';
 import { useAppStore, useRouteStore, useThemeStore } from '@/store';
 import { useRouterPush } from '@/composables';
+import { GlobalLogo } from '@/layouts/common';
+
+defineOptions({ name: 'GlobalSider' });
 
 const route = useRoute();
 const app = useAppStore();
 const theme = useThemeStore();
 const routeStore = useRouteStore();
 const { routerPush } = useRouterPush();
-const routeHomePath = routePath('root');
 
+const isHorizontalMix = computed(() => theme.layout.mode === 'horizontal-mix');
 const showTitle = computed(() => !app.siderCollapse && theme.layout.mode !== 'vertical-mix');
-
 const menus = computed(() => routeStore.menus as GlobalMenuOption[]);
 
 const activeKey = computed(() => (route.meta?.activeMenu ? route.meta.activeMenu : route.name) as string);
