@@ -22,6 +22,8 @@
 <script setup lang="ts">
 import { useAppStore, useThemeStore, useRouteStore } from '@/store';
 
+defineOptions({ name: 'GlobalContent' });
+
 interface Props {
   // 显示padding
   showPadding?: boolean;
