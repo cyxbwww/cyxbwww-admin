@@ -1,10 +1,18 @@
 import type { GlobalThemeOverrides } from 'naive-ui';
 import { cloneDeep } from 'lodash-es';
 import { themeSetting } from '@/settings';
-import { getThemeColor, getColorPalette, addColorAlpha } from '@/utils';
+import { EnumStorageKey } from '@/enum';
+import { addColorAlpha, getColorPalette, getLocal, getThemeColor, removeLocal, setLocal } from '@/utils';
 
-// 获取主题配置
-export function getThemeSettings() {
+/** 初始化主题配置 */
+export function initThemeSettings() {
+  const isProd = import.meta.env.PROD;
+  // 生产环境才缓存主题配置，本地开发实时调整配置更改配置的json
+  const storageSettings = getThemeSettings();
+  if (isProd && storageSettings) {
+    return storageSettings;
+  }
+
   const themeColor = getThemeColor() || themeSetting.themeColor;
   const info = themeSetting.isCustomizeInfoColor ? themeSetting.otherColor.info : getColorPalette(themeColor, 7);
   const otherColor = { ...themeSetting.otherColor, info };
@@ -21,7 +29,7 @@ interface ColorAction {
   handler: (color: string) => string;
 }
 
-// 获取主题颜色的各种场景对应的颜色
+/** 获取主题颜色的各种场景对应的颜色 */
 function getThemeColors(colors: [ColorType, string][]) {
   const colorActions: ColorAction[] = [
     { scene: '', handler: color => color },
@@ -44,7 +52,7 @@ function getThemeColors(colors: [ColorType, string][]) {
   return themeColor;
 }
 
-// 获取naive的主题颜色
+/** 获取naive的主题颜色 */
 export function getNaiveThemeOverrides(colors: Record<ColorType, string>): GlobalThemeOverrides {
   const { primary, success, warning, error } = colors;
 
@@ -68,4 +76,19 @@ export function getNaiveThemeOverrides(colors: Record<ColorType, string>): Globa
       colorLoading
     }
   };
+}
+
+/** 获取缓存中的主题配置 */
+function getThemeSettings() {
+  return getLocal<Theme.Setting>(EnumStorageKey['theme-settings']);
+}
+
+/** 获取缓存中的主题配置 */
+export function setThemeSettings(settings: Theme.Setting) {
+  return setLocal(EnumStorageKey['theme-settings'], settings);
+}
+
+/** 清除缓存配置 */
+export function clearThemeSettings() {
+  removeLocal(EnumStorageKey['theme-settings']);
 }

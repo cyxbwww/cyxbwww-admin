@@ -1,10 +1,10 @@
 import { darkTheme } from 'naive-ui';
-import { getThemeSettings, getNaiveThemeOverrides } from './helpers';
+import { initThemeSettings, getNaiveThemeOverrides } from './helpers';
 
 type ThemeState = Theme.Setting;
 
 export const useThemeStore = defineStore('theme-store', {
-  state: (): ThemeState => getThemeSettings(),
+  state: (): ThemeState => initThemeSettings(),
   getters: {
     // naive-ui主题配置
     naiveThemeOverrides(state) {

@@ -1,6 +1,3 @@
-import { nextTick } from 'vue';
-import { defineStore } from 'pinia';
-
 interface AppState {
   // 重载页面(控制页面的显示)
   reloadFlag: boolean;
@@ -47,7 +44,7 @@ export const useAppStore = defineStore('app-store', {
       this.settingDrawerVisible = false;
     },
     // 切换抽屉可见状态
-    toggleSettingdrawerVisible() {
+    toggleSettingDrawerVisible() {
       this.settingDrawerVisible = !this.settingDrawerVisible;
     },
     // 设置侧边栏折叠状态
