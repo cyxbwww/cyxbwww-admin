@@ -1,6 +1,6 @@
 <template>
   <dark-mode-container class="flex-center h-full">
-    <span>Copyright ©2021 cyxbwww</span>
+    <span>Copyright ©2022 cyxbwww</span>
   </dark-mode-container>
 </template>
 
