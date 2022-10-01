@@ -68,3 +68,19 @@ function addPartialProps(config: {
 function hideInMenu(route: AuthRoute.Route) {
   return Boolean(route.meta.hide);
 }
+
+// 获取当前路由所在菜单数据的paths
+export function getActiveKeyPathsOfMenus(activeKey: string, menus: GlobalMenuOption[]) {
+  return menus.map(menu => getActiveKeyPathsOfMenu(activeKey, menu)).flat(1);
+}
+
+function getActiveKeyPathsOfMenu(activeKey: string, menu: GlobalMenuOption) {
+  const keys: string[] = [];
+  if (activeKey.includes(menu.routeName)) {
+    keys.push(menu.routeName);
+  }
+  if (menu.children) {
+    keys.push(...menu.children.map(item => getActiveKeyPathsOfMenu(activeKey, item as GlobalMenuOption)).flat(1));
+  }
+  return keys;
+}
