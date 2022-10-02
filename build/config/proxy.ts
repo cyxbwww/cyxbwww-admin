@@ -5,12 +5,12 @@
  */
 
 import type { ProxyOptions } from 'vite';
-import { getEnvConfig } from '../../.env-config';
+import { getServiceEnvConfig } from '../../.env-config';
 
 export function createViteProxy(viteEnv: ImportMetaEnv) {
   if (viteEnv.VITE_HTTP_PROXY === 'N') return undefined;
 
-  const { http } = getEnvConfig(viteEnv);
+  const { http } = getServiceEnvConfig(viteEnv);
   const proxy: Record<string, string | ProxyOptions> = {
     [http.proxy]: {
       target: http.url,

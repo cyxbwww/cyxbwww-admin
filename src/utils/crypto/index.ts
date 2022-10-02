@@ -3,7 +3,7 @@ import CryptoJS from 'crypto-js';
 const CryptoSecret = '__CryptoJS_Secret__';
 
 /**
- * @description 加密数据
+ * 加密数据
  * @param data - 数据
  */
 export function encrypto(data: any) {
@@ -12,7 +12,7 @@ export function encrypto(data: any) {
 }
 
 /**
- * @description 解密数据
+ * 解密数据
  * @param cipherText - 密文
  */
 export function decrypto(cipherText: string) {

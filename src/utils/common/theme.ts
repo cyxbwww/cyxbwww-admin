@@ -1,7 +1,7 @@
 import { EnumStorageKey } from '@/enum';
 
 /**
- * @description 缓存主题颜色
+ * 缓存主题颜色
  * @param color
  */
 export function setThemeColor(color: string) {

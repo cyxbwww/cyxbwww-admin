@@ -2,6 +2,7 @@ import type { Router } from 'vue-router';
 import { defineStore } from 'pinia';
 import { ROOT_ROUTE, constantRoutes, router, routes as staticRoutes } from '@/router';
 import { useAuthStore, useTabStore } from '@/store';
+import { fetchUserRoutes } from '@/service';
 import {
   getUserInfo,
   transformAuthRouteToMenu,
@@ -13,7 +14,6 @@ import {
   getConstantRouteNames
 } from '@/utils';
 import { filterAuthRoutesByUserPermission } from '@/utils';
-import { fetchUserRoutes } from '@/service/api';
 
 interface RouteState {
   /**
@@ -45,7 +45,7 @@ export const useRouteStore = defineStore('route-store', {
   }),
   actions: {
     /**
-     * @description 是否是有效的固定路由
+     * 是否是有效的固定路由
      * @param name 路由名称
      */
     isValidConstantRoute(name: AuthRoute.RouteKey) {
@@ -54,7 +54,7 @@ export const useRouteStore = defineStore('route-store', {
       return constantRouteNames.includes(name) && name !== NOT_FOUND_PAGE_NAME;
     },
     /**
-     * @description 处理权限路由
+     * 处理权限路由
      * @param routes - 权限路由
      */
     handleAuthRoutes(routes: AuthRoute.Route[]) {

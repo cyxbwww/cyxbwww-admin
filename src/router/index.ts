@@ -14,6 +14,10 @@ export const router = createRouter({
   routes: transformAuthRoutesToVueRoutes(constantRoutes)
 });
 
+/**
+ * setup vue router.
+ * - [安装vue路由]
+ * */
 export async function setupRoute(app: App) {
   app.use(router);
   createRouterGuard(router);

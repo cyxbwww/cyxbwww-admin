@@ -55,14 +55,14 @@ export const useTabStore = defineStore('tab-store', {
       setTabRoutes(this.tabs);
     },
     /**
-     * @description 设置当前路由对应的页签为激活状态
+     * 设置当前路由对应的页签为激活状态
      * @param fullPath - 路由fullPath
      */
     setActiveTab(fullPath: string) {
       this.activeTab = fullPath;
     },
     /**
-     * @description 设置当前路由对应的页签title
+     * 设置当前路由对应的页签title
      * @param title - tab名称
      */
     setActiveTabTitle(title: string) {
@@ -72,7 +72,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * @description 初始化首页页签路由
+     * 初始化首页页签路由
      * @param routeHomeName - 路由首页的name
      * @param router - 路由实例
      */
@@ -85,7 +85,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * @description 添加多页签
+     * 添加多页签
      * @param route - 路由
      */
     addTab(route: RouteLocationNormalizedLoaded) {
@@ -111,7 +111,7 @@ export const useTabStore = defineStore('tab-store', {
       this.tabs.push(tab);
     },
     /**
-     * @description 删除多页签
+     * 删除多页签
      * @param fullPath - 路由fullPath
      */
     removeTab(fullPath: string) {
@@ -127,7 +127,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * @description 清空多页签(多页签首页保留)
+     * 清空多页签(多页签首页保留)
      * @param excludes - 保留的多页签path
      */
     clearTab(excludes: string[] = []) {
@@ -145,7 +145,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * @description 清除左边多页签
+     * 清除左边多页签
      * @param fullPath - 路由fullPath
      */
     clearLeftTab(fullPath: string) {
@@ -156,7 +156,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * @description 清除右边多页签
+     * 清除右边多页签
      * @param fullPath - 路由fullPath
      */
     clearRightTab(fullPath: string) {
@@ -171,7 +171,7 @@ export const useTabStore = defineStore('tab-store', {
       this.clearTab();
     },
     /**
-     * @description 点击单个tab
+     * 点击单个tab
      * @param fullPath - 路由fullPath
      */
     handleClickTab(fullPath: string) {
@@ -184,7 +184,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * @description 记录tab滚动位置
+     * 记录tab滚动位置
      * @param fullPath - 路由fullPath
      * @param position - tab当前页的滚动位置
      */
@@ -195,7 +195,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * @description 获取tab滚动位置
+     * 获取tab滚动位置
      * @param fullPath - 路由fullPath
      */
     getTabScrollPosition(fullPath: string) {

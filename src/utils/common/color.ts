@@ -46,7 +46,7 @@ export function getAllColorPalette(color: string) {
 }
 
 /**
- * @description 获取色相渐变
+ * 获取色相渐变
  * @param hsv - hsv格式颜色值
  * @param i - 与6的相对距离
  * @param isLight - 是否是亮颜色
@@ -73,7 +73,7 @@ function getHue(hsv: HsvColor, i: number, isLight: boolean) {
 }
 
 /**
- * @description 获取饱和度渐变
+ * 获取饱和度渐变
  * @param hsv - hsv格式颜色值
  * @param i - 与6的相对距离
  * @param isLight - 是否是亮颜色
@@ -100,7 +100,7 @@ function getSaturation(hsv: HsvColor, i: number, isLight: boolean) {
 }
 
 /**
- * @description 获取明度渐变
+ * 获取明度渐变
  * @param hsv - hsv格式颜色值
  * @param i - 与6的相对距离
  * @param isLight - 是否是亮颜色
@@ -119,7 +119,7 @@ function getValue(hsv: HsvColor, i: number, isLight: boolean) {
 }
 
 /**
- * @description 给颜色加透明度
+ * 给颜色加透明度
  * @param color - 颜色
  * @param alpha - 透明度(0 - 1)
  */
@@ -128,7 +128,7 @@ export function addColorAlpha(color: string, alpha: number) {
 }
 
 /**
- * @description 颜色混合
+ * 颜色混合
  * @param firstColor - 第一个颜色
  * @param secondColor - 第二个颜色
  * @param ratio - 第二个颜色占比
@@ -138,7 +138,7 @@ export function mixColor(firstColor: string, secondColor: string, ratio: number)
 }
 
 /**
- * @description 是否是白颜色
+ * 是否是白颜色
  * @param color - 颜色
  */
 export function isWhiteColor(color: string) {

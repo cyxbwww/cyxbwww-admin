@@ -4,7 +4,7 @@ import { EnumContentType } from '@/enum';
 import { isArray, isFile } from '@/utils';
 
 /**
- * @description 请求数据的转换
+ * 请求数据的转换
  * @param requestData - 请求数据
  * @param contentType - 请求头的Content-Type
  */

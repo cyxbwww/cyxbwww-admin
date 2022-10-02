@@ -6,7 +6,7 @@ import { BasicLayout, BlankLayout } from '@/layouts';
 type LayoutComponent = Record<EnumType.LayoutComponentName, () => Promise<Component>>;
 
 /**
- * @description 获取页面导入的vue文件(懒加载)
+ * 获取页面导入的vue文件(懒加载)
  * @param layoutType - 布局类型
  */
 export function getLayoutComponent(layoutType: EnumType.LayoutComponentName) {
@@ -18,7 +18,7 @@ export function getLayoutComponent(layoutType: EnumType.LayoutComponentName) {
 }
 
 /**
- * @description 获取页面导入的vue文件(懒加载的方式)
+ * 获取页面导入的vue文件(懒加载的方式)
  * @param routeKey - 路由key
  */
 export function getViewComponent(routeKey: AuthRoute.RouteKey) {

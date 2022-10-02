@@ -33,7 +33,7 @@ declare namespace AuthRoute {
     | '/:pathMatch(.*)*';
 
   /**
-   * @description 路由的组件
+   * 路由的组件
    * - basic - 基础布局，具有公共部分的布局
    * - blank - 空白布局
    * - multi - 多级路由布局(三级路由或三级以上时，除第一级路由和最后一级路由，其余的采用该布局)

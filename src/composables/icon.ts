@@ -1,7 +1,8 @@
 import SvgIcon from '@/components/custom/SvgIcon.vue';
 
 /**
- * @description 图标渲染 - 用于vue的render函数
+ * 图标渲染
+ * - 用于vue的render函数
  */
 export const useIconRender = () => {
   interface IconConfig {
@@ -26,7 +27,7 @@ export const useIconRender = () => {
   }
 
   /**
-   * @description 图标渲染
+   * 图标渲染
    * @param config
    * @property icon - 图标名称(iconify图标的名称), 例如：mdi-account 或者 mdi:account
    * @property localIcon - 本地svg图标文件名(assets/svg-icon文件夹下)

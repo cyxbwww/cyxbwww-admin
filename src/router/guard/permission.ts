@@ -7,11 +7,10 @@ import { createDynamicRouteGuard } from '@/router/guard/dynamic';
 export async function createPermissionGuard(
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,
-  next: NavigationGuardNext,
-  router: Router
+  next: NavigationGuardNext
 ) {
   // 动态路由
-  const permission = await createDynamicRouteGuard(to, from, next, router);
+  const permission = await createDynamicRouteGuard(to, from, next);
   if (!permission) return;
 
   // 外链路由, 从新标签打开，返回上一个路由

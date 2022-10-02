@@ -6,9 +6,9 @@
 
 import { router as globalRouter } from '@/router';
 import { routeName } from '@/router';
+import { fetchLogin } from '@/service';
 import { setUserInfo, setToken, getUserInfo, getToken, clearAuthStorage } from '@/utils';
 import { useRouterPush } from '@/composables';
-import { fetchLogin } from '@/service/api';
 
 interface AuthState {
   /** 用户信息 */

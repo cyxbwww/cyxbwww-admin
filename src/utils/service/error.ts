@@ -13,7 +13,7 @@ import { exeStrategyActions, showErrorMsg } from '@/utils';
 type ErrorStatus = keyof typeof ERROR_STATUS;
 
 /**
- * @description 处理axios请求失败的错误
+ * 处理axios请求失败的错误
  * @param axiosError - 错误
  */
 export function handleAxiosError(axiosError: AxiosError) {
@@ -57,7 +57,7 @@ export function handleAxiosError(axiosError: AxiosError) {
 }
 
 /**
- * @description 处理请求成功后的错误
+ * 处理请求成功后的错误
  * @param response - 请求的响应
  */
 export function handleResponseError(response: AxiosResponse) {
@@ -83,7 +83,7 @@ export function handleResponseError(response: AxiosResponse) {
 }
 
 /**
- * @description 处理后端返回的错误(业务错误)
+ * 处理后端返回的错误(业务错误)
  * @param backendResult - 后端接口的响应数据
  * @param config
  */

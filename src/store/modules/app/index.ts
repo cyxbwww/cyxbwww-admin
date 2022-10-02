@@ -18,7 +18,7 @@ export const useAppStore = defineStore('app-store', {
   }),
   actions: {
     /**
-     * @description 重载页面
+     * 重载页面
      * @param duration - 重载的延迟时间(ms)
      */
     async reloadPage(duration = 0) {

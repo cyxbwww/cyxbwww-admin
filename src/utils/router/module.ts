@@ -1,5 +1,5 @@
 /**
- * @description 权限路由排序
+ * 权限路由排序
  * @param routes - 权限路由
  */
 function sortRoutes(routes: AuthRoute.Route[]) {
@@ -7,7 +7,7 @@ function sortRoutes(routes: AuthRoute.Route[]) {
 }
 
 /**
- * @description 处理全部导入的路由模块
+ * 处理全部导入的路由模块
  * @param modules - 路由模块
  */
 export function handleModuleRoutes(modules: AuthRoute.RouteModule) {

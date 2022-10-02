@@ -3,7 +3,7 @@ import { getLayoutComponent, getViewComponent } from '@/utils';
 type ComponentAction = Record<AuthRoute.RouteComponent, () => void>;
 
 /**
- * @description 获取所有固定路由的名称集合
+ * 获取所有固定路由的名称集合
  * @param routes - 固定路由
  */
 export function getConstantRouteNames(routes: AuthRoute.Route[]) {
@@ -11,7 +11,7 @@ export function getConstantRouteNames(routes: AuthRoute.Route[]) {
 }
 
 /**
- * @description 获取所有固定路由的名称集合
+ * 获取所有固定路由的名称集合
  * @param route - 固定路由
  */
 function getConstantRouteName(route: AuthRoute.Route) {
@@ -23,7 +23,7 @@ function getConstantRouteName(route: AuthRoute.Route) {
 }
 
 /**
- * @description 将权限路由转换成vue路由
+ * 将权限路由转换成vue路由
  * @param routes - 权限路由
  * @description 所有多级路由都会被转换成二级路由
  */
@@ -46,7 +46,7 @@ export function transformRouteNameToRoutePath(
 }
 
 /**
- * @description 将权限路由转换成搜索的菜单数据
+ * 将权限路由转换成搜索的菜单数据
  * @param routes - 权限路由
  * @param treeMap
  */
@@ -76,7 +76,7 @@ export function transformRoutePathToRouteName(
 }
 
 /**
- * @description 将单个权限路由转换成vue路由
+ * 将单个权限路由转换成vue路由
  * @param item - 单个权限路由
  */
 export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
@@ -183,7 +183,7 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
 }
 
 /**
- * @description 是否有动态路由path
+ * 是否有动态路由path
  * @param item - 权限路由
  */
 function hasDynamicPath(item: AuthRoute.Route) {
@@ -191,7 +191,7 @@ function hasDynamicPath(item: AuthRoute.Route) {
 }
 
 /**
- * @description 是否有外链
+ * 是否有外链
  * @param item - 权限路由
  */
 function hasHref(item: AuthRoute.Route) {
@@ -199,7 +199,7 @@ function hasHref(item: AuthRoute.Route) {
 }
 
 /**
- * @description 是否有路由组件
+ * 是否有路由组件
  * @param item - 权限路由
  */
 function hasComponent(item: AuthRoute.Route) {
@@ -207,7 +207,7 @@ function hasComponent(item: AuthRoute.Route) {
 }
 
 /**
- * @description 是否有子路由
+ * 是否有子路由
  * @param item - 权限路由
  */
 function hasChildren(item: AuthRoute.Route) {
@@ -215,7 +215,7 @@ function hasChildren(item: AuthRoute.Route) {
 }
 
 /**
- * @description 是否是单层级路由
+ * 是否是单层级路由
  * @param item - 权限路由
  */
 function isSingleRoute(item: AuthRoute.Route) {

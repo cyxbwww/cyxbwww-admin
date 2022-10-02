@@ -3,10 +3,10 @@
  * @author luomingfeng
  * @date 2022/4/15 20:49
  */
-import { getEnvConfig } from '~/.env-config';
+import { getServiceEnvConfig } from '~/.env-config';
 import { createRequest } from './request';
 
-const { http } = getEnvConfig(import.meta.env);
+const { http } = getServiceEnvConfig(import.meta.env);
 const isHttpProxy = import.meta.env.VITE_HTTP_PROXY === 'Y';
 
 export const request = createRequest({

@@ -5,13 +5,21 @@
  * - pre: 预生产环境
  * - prod: 生产环境
  */
-type EnvType = 'dev' | 'test' | 'pre' | 'prod';
+type ServiceEnvType = 'dev' | 'test' | 'pre' | 'prod';
+
+/** 后台服务的环境配置 */
+interface ServiceEnvConfig {
+  /** 请求地址 */
+  url: string;
+  /** 代理地址 */
+  proxy: string;
+}
 
 interface ImportMetaEnv {
   /** 项目基本地址 */
   readonly VITE_BASE_URL: string;
   /** 后端服务的环境类型 */
-  readonly VITE_ENV_TYPE?: EnvType;
+  readonly VITE_ENV_TYPE?: ServiceEnvType;
   /** 开启请求代理 */
   readonly VITE_HTTP_PROXY?: 'Y' | 'N';
   /**

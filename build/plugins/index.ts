@@ -5,7 +5,7 @@ import unocss from './unocss';
 import unplugin from './unplugin';
 
 /**
- * @description vite插件
+ * vite插件
  * @param viteEnv - 环境变量配置
  */
 export function setupVitePlugins(viteEnv: ImportMetaEnv): (PluginOption | PluginOption[])[] {
