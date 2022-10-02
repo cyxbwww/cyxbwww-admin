@@ -83,7 +83,7 @@ function getThemeSettings() {
   return getLocal<Theme.Setting>(EnumStorageKey['theme-settings']);
 }
 
-/** 获取缓存中的主题配置 */
+/** 设置缓存中的主题配置 */
 export function setThemeSettings(settings: Theme.Setting) {
   return setLocal(EnumStorageKey['theme-settings'], settings);
 }

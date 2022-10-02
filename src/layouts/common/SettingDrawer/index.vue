@@ -6,6 +6,7 @@
       <theme-color-select />
       <page-func />
       <page-view />
+      <theme-config />
     </n-drawer-content>
   </n-drawer>
   <drawer-button v-if="showButton" />
@@ -13,7 +14,7 @@
 
 <script setup lang="ts">
 import { useAppStore } from '@/store';
-import { DarkMode, DrawerButton, LayoutMode, PageFunc, PageView, ThemeColorSelect } from './components';
+import { DarkMode, DrawerButton, LayoutMode, PageFunc, PageView, ThemeColorSelect, ThemeConfig } from './components';
 
 defineOptions({ name: 'SettingDrawer' });
 
