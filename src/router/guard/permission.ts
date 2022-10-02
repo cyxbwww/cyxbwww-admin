@@ -3,6 +3,7 @@ import { useAuthStore } from '@/store';
 import { exeStrategyActions, getToken } from '@/utils';
 import { createDynamicRouteGuard } from '@/router/guard/dynamic';
 
+/** 处理路由页面的权限 */
 export async function createPermissionGuard(
   to: RouteLocationNormalized,
   from: RouteLocationNormalized,

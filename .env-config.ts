@@ -1,7 +1,7 @@
 /**
- * @Description 请求环境配置
- * @Author luomingfeng
- * @Date 2022/4/16 0:08
+ * @description 请求环境配置
+ * @author luomingfeng
+ * @date 2022/4/16 0:08
  */
 type ServiceEnv = Record<
   EnvType,

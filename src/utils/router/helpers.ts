@@ -2,12 +2,36 @@ import type { RouteRecordRaw } from 'vue-router';
 import { getLayoutComponent, getViewComponent } from '@/utils';
 type ComponentAction = Record<AuthRoute.RouteComponent, () => void>;
 
-// 所有多级路由都会被转换成二级路由
+/**
+ * @description 获取所有固定路由的名称集合
+ * @param routes - 固定路由
+ */
+export function getConstantRouteNames(routes: AuthRoute.Route[]) {
+  return routes.map(route => getConstantRouteName(route)).flat(1);
+}
+
+/**
+ * @description 获取所有固定路由的名称集合
+ * @param route - 固定路由
+ */
+function getConstantRouteName(route: AuthRoute.Route) {
+  const names = [route.name];
+  if (hasChildren(route)) {
+    names.push(...route.children!.map(item => getConstantRouteName(item)).flat(1));
+  }
+  return names;
+}
+
+/**
+ * @description 将权限路由转换成vue路由
+ * @param routes - 权限路由
+ * @description 所有多级路由都会被转换成二级路由
+ */
 export function transformAuthRoutesToVueRoutes(routes: AuthRoute.Route[]) {
   return routes.map(route => transformAuthRouteToVueRoute(route)).flat(1);
 }
 
-// 将路由名字转换成路由路径
+/** 将路由名字转换成路由路径 */
 export function transformRouteNameToRoutePath(
   name: Exclude<AuthRoute.RouteKey, 'not-found-page'>
 ): AuthRoute.RoutePath {
@@ -21,7 +45,25 @@ export function transformRouteNameToRoutePath(
   return (pathSplitMark + path) as AuthRoute.RoutePath;
 }
 
-// 将路由路径转换成路由名字
+/**
+ * @description 将权限路由转换成搜索的菜单数据
+ * @param routes - 权限路由
+ * @param treeMap
+ */
+export function transformAuthRoutesToSearchMenus(routes: AuthRoute.Route[], treeMap: AuthRoute.Route[] = []) {
+  if (routes && routes.length === 0) return [];
+  return routes.reduce((acc, cur) => {
+    if (!cur.meta?.hide) {
+      acc.push(cur);
+    }
+    if (cur.children && cur.children.length > 0) {
+      transformAuthRoutesToSearchMenus(cur.children, treeMap);
+    }
+    return acc;
+  }, treeMap);
+}
+
+/** 将路由路径转换成路由名字 */
 export function transformRoutePathToRouteName(
   path: Exclude<AuthRoute.RoutePath, '/not-found-page' | '/:pathMatch(.*)*'>
 ): AuthRoute.RouteKey {
@@ -33,7 +75,10 @@ export function transformRoutePathToRouteName(
   return path.split(pathSplitMark).slice(1).join(routeSplitMark) as AuthRoute.RouteKey;
 }
 
-// 将单个权限路由转换成vue路由
+/**
+ * @description 将单个权限路由转换成vue路由
+ * @param item - 单个权限路由
+ */
 export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
   const resultRoute: RouteRecordRaw[] = [];
   const itemRoute = { ...item } as RouteRecordRaw;
@@ -137,27 +182,42 @@ export function transformAuthRouteToVueRoute(item: AuthRoute.Route) {
   return resultRoute;
 }
 
-// 是否有动态路由path
+/**
+ * @description 是否有动态路由path
+ * @param item - 权限路由
+ */
 function hasDynamicPath(item: AuthRoute.Route) {
   return Boolean(item.meta.dynamicPath);
 }
 
-// 是否有外链
+/**
+ * @description 是否有外链
+ * @param item - 权限路由
+ */
 function hasHref(item: AuthRoute.Route) {
   return Boolean(item.meta.href);
 }
 
-// 是否有路由组件
+/**
+ * @description 是否有路由组件
+ * @param item - 权限路由
+ */
 function hasComponent(item: AuthRoute.Route) {
   return Boolean(item.component);
 }
 
-// 是否有子路由
+/**
+ * @description 是否有子路由
+ * @param item - 权限路由
+ */
 function hasChildren(item: AuthRoute.Route) {
   return Boolean(item.children && item.children.length);
 }
 
-// 是否是单层级路由
+/**
+ * @description 是否是单层级路由
+ * @param item - 权限路由
+ */
 function isSingleRoute(item: AuthRoute.Route) {
   return Boolean(item.meta.singleLayout);
 }

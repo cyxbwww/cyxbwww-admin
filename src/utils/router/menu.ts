@@ -1,6 +1,41 @@
-import { customIconRender, iconifyRender } from '@/utils';
+import { useIconRender } from '@/composables';
 
-// 将权限路由转换成菜单
+/** 路由不转换菜单 */
+function hideInMenu(route: AuthRoute.Route) {
+  return Boolean(route.meta.hide);
+}
+
+/** 给菜单添加可选属性 */
+function addPartialProps(config: {
+  menu: GlobalMenuOption;
+  icon?: string;
+  localIcon?: string;
+  children?: GlobalMenuOption[];
+}) {
+  const { iconRender } = useIconRender();
+
+  const item = { ...config.menu };
+
+  const { icon, localIcon, children } = config;
+
+  if (localIcon) {
+    Object.assign(item, { icon: iconRender({ localIcon }) });
+  }
+
+  if (icon) {
+    Object.assign(item, { icon: iconRender({ icon }) });
+  }
+
+  if (children) {
+    Object.assign(item, { children });
+  }
+  return item;
+}
+
+/**
+ * 将权限路由转换成菜单
+ * @param routes - 路由
+ */
 export function transformAuthRouteToMenu(routes: AuthRoute.Route[]): GlobalMenuOption[] {
   const globalMenu: GlobalMenuOption[] = [];
   routes.forEach(route => {
@@ -18,7 +53,7 @@ export function transformAuthRouteToMenu(routes: AuthRoute.Route[]): GlobalMenuO
         routePath: path
       },
       icon: meta.icon,
-      customIcon: meta.customIcon,
+      localIcon: meta.localIcon,
       children: menuChildren
     });
 
@@ -30,46 +65,11 @@ export function transformAuthRouteToMenu(routes: AuthRoute.Route[]): GlobalMenuO
   return globalMenu;
 }
 
-// 将权限路由转换成搜索的菜单数据
-export function transformAuthRoutesToSearchMenus(routes: AuthRoute.Route[], treeMap: AuthRoute.Route[] = []) {
-  if (routes && routes.length === 0) return [];
-  return routes.reduce((acc, cur) => {
-    if (!cur.meta?.hide) {
-      acc.push(cur);
-    }
-    if (cur.children && cur.children.length > 0) {
-      transformAuthRoutesToSearchMenus(cur.children, treeMap);
-    }
-    return acc;
-  }, treeMap);
-}
-
-// 给菜单添加可选属性
-function addPartialProps(config: {
-  menu: GlobalMenuOption;
-  icon?: string;
-  customIcon?: string;
-  children?: GlobalMenuOption[];
-}) {
-  const item = { ...config.menu };
-  if (config.icon) {
-    Object.assign(item, { icon: iconifyRender(config.icon) });
-  }
-  if (config.customIcon) {
-    Object.assign(item, { icon: customIconRender(config.customIcon) });
-  }
-  if (config.children) {
-    Object.assign(item, { children: config.children });
-  }
-  return item;
-}
-
-// 路由不转换菜单
-function hideInMenu(route: AuthRoute.Route) {
-  return Boolean(route.meta.hide);
-}
-
-// 获取当前路由所在菜单数据的paths
+/**
+ * 获取当前路由所在菜单数据的paths
+ * @param activeKey - 当前路由的key
+ * @param menus - 菜单数据
+ */
 export function getActiveKeyPathsOfMenus(activeKey: string, menus: GlobalMenuOption[]) {
   return menus.map(menu => getActiveKeyPathsOfMenu(activeKey, menu)).flat(1);
 }

@@ -1,7 +1,7 @@
 <!--
- * @Description 登录背景
- * @Author luomingfeng
- * @Date 2022/3/21 23:35
+ * @description 登录背景
+ * @author luomingfeng
+ * @date 2022/3/21 23:35
 -->
 <template>
   <div class="absolute-lt z-1 wh-full overflow-hidden">
@@ -19,7 +19,7 @@ import { getColorPalette } from '@/utils';
 import { CornerTop, CornerBottom } from './components';
 
 interface Props {
-  // 主题颜色
+  /** 主题颜色 */
   themeColor: string;
 }
 

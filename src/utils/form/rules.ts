@@ -1,20 +1,21 @@
 import { FormItemRule } from 'naive-ui';
 import { REGEXP_PHONE } from '@/config';
 
-// 表单规则
+/** 表单规则 */
 interface CustomFormRules {
-  // 手机号码
+  /** 手机号码 */
   phone: FormItemRule[];
-  // 用户名
+  /** 用户名 */
   username: FormItemRule[];
-  // 密码
+  /** 密码 */
   password: FormItemRule[];
-  // 图片验证码
+  /** 图片验证码 */
   imgVerificationCode: FormItemRule[];
-  // 短信验证码
+  /** 短信验证码 */
   code: FormItemRule[];
 }
 
+/** 表单规则 */
 export const formRules: CustomFormRules = {
   phone: [
     { required: true, message: '请输入手机号码' },

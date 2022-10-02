@@ -9,10 +9,10 @@ const PREFIX = './';
 const SUFFIX = '/index.vue';
 const PATH_SPLIT_MARK = '/';
 const ROUTE_KEY_SPLIT_MARK = '_';
-// 系统的内置路由，该文件夹名称不作为RouteKey
+/** 系统的内置路由，该文件夹名称不作为RouteKey */
 const COMMON = 'common_';
 
-// 过滤掉组件文件
+/** 过滤掉组件文件 */
 const viewKeys = Object.keys(importViews).filter(key => !key.includes(COMPONENTS_KEY));
 
 function getViewComponent() {

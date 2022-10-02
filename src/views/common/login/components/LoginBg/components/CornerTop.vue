@@ -1,7 +1,7 @@
 <!--
- * @Description 登录背景svg
- * @Author luomingfeng
- * @Date 2022/3/21 23:35
+ * @description 登录背景svg
+ * @author luomingfeng
+ * @date 2022/3/21 23:35
 -->
 <template>
   <svg height="1337" width="1337">

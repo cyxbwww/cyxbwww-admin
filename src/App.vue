@@ -1,7 +1,7 @@
 <!--
- * @Description 主页面
- * @Author luomingfeng
- * @Date 2022/3/21 23:34
+ * @description 主页面
+ * @author luomingfeng
+ * @date 2022/3/21 23:34
 -->
 <template>
   <n-config-provider

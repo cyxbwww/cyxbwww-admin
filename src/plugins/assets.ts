@@ -1,7 +1,7 @@
 /**
- * @Description 全局样式
- * @Author luomingfeng
- * @Date 2022/3/21 23:38
+ * @description 全局样式
+ * @author luomingfeng
+ * @date 2022/3/21 23:38
  */
 import 'uno.css';
 import 'virtual:svg-icons-register';

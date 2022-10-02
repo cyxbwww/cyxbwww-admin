@@ -1,12 +1,18 @@
 /**
- * @Description 封装 axios 请求类
- * @Author luomingfeng
- * @Date 2022/5/1 11:37
+ * @description 封装 axios 请求类
+ * @author luomingfeng
+ * @date 2022/5/1 11:37
  */
 import type { AxiosInstance, AxiosRequestConfig, AxiosError } from 'axios';
 import axios from 'axios';
-import { EnumContentType } from '@/enum';
-import { getToken, handleAxiosError, handleBackendError, handleServiceResult, transformRequestData } from '@/utils';
+import {
+  getToken,
+  handleAxiosError,
+  handleBackendError,
+  handleResponseError,
+  handleServiceResult,
+  transformRequestData
+} from '@/utils';
 
 /**
  * @param axiosConfig - axios配置
@@ -30,21 +36,12 @@ export default class CustomAxiosInstance {
     this.setInterceptor();
   }
 
-  // 设置拦截器
+  /** 设置请求拦截器 */
   setInterceptor() {
     this.instance.interceptors.request.use(
       async config => {
         const handleConfig = { ...config };
         if (handleConfig.headers) {
-          if (handleConfig.isJson) {
-            handleConfig.headers['Content-Type'] = EnumContentType.json;
-          }
-          if (handleConfig.isFormUrlencoded) {
-            handleConfig.headers['Content-Type'] = EnumContentType.formUrlencoded;
-          }
-          if (handleConfig.isFormData) {
-            handleConfig.headers['Content-Type'] = EnumContentType.formData;
-          }
           // 数据转换
           const contentType = handleConfig.headers['Content-Type'] as string;
           handleConfig.data = await transformRequestData(handleConfig.data, contentType);
@@ -61,14 +58,22 @@ export default class CustomAxiosInstance {
 
     this.instance.interceptors.response.use(
       async response => {
-        const backend = response.data;
-        const { codeKey, dataKey, successCode } = this.backendConfig;
-        // 请求成功
-        if (backend[codeKey] === successCode) {
-          return handleServiceResult(null, backend[dataKey]);
+        const { status } = response;
+
+        if (status === 200 || status < 300 || status === 304) {
+          const backend = response.data;
+          const { codeKey, dataKey, successCode } = this.backendConfig;
+
+          // 请求成功
+          if (backend[codeKey] === successCode) {
+            return handleServiceResult(null, backend[dataKey]);
+          }
+
+          const error = handleBackendError(backend, this.backendConfig);
+          return handleServiceResult(error, null);
         }
 
-        const error = handleBackendError(backend, this.backendConfig);
+        const error = handleResponseError(response);
         return handleServiceResult(error, null);
       },
       (axiosError: AxiosError) => {

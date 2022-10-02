@@ -1,7 +1,7 @@
 /**
- * @Description 入口文件
- * @Author luomingfeng
- * @Date 2022/3/10 0:04
+ * @description 入口文件
+ * @author luomingfeng
+ * @date 2022/3/10 0:04
  */
 
 import { setupAssets } from '@/plugins';

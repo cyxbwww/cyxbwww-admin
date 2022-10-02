@@ -1,7 +1,7 @@
 <!--
- * @Description 登录页
- * @Author luomingfeng
- * @Date 2022/3/21 23:34
+ * @description 登录页
+ * @author luomingfeng
+ * @date 2022/3/21 23:34
 -->
 <template>
   <div class="relative flex-center wh-full" :style="{ backgroundColor: bgColor }">
@@ -32,7 +32,7 @@ import { getColorPalette, mixColor } from '@/utils';
 import { LoginBg, PwdLogin, CodeLogin, Register, ResetPwd } from './components';
 
 interface Props {
-  // 登录模块分类
+  /** 登录模块分类 */
   module: EnumType.LoginModuleKey;
 }
 

@@ -5,7 +5,7 @@ interface StorageData {
   expire: number | null;
 }
 
-// 默认缓存期限为7天
+/** 默认缓存期限为7天 */
 const DEFAULT_CACHE_TIME = 60 * 60 * 24 * 7;
 
 export function setLocal(key: string, value: unknown, expire: number | null = DEFAULT_CACHE_TIME) {

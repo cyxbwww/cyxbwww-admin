@@ -1,7 +1,7 @@
 import type { RouteLocationNormalizedLoaded, Router } from 'vue-router';
 import { defineStore } from 'pinia';
+import { useThemeStore } from '@/store';
 import { useRouterPush } from '@/composables';
-import { useThemeStore } from '../theme';
 import {
   clearTabRoutes,
   getIndexInTabRoutes,
@@ -13,11 +13,11 @@ import {
 } from './helpers';
 
 interface TabState {
-  // 多页签数据
+  /** 多页签数据 */
   tabs: GlobalTabRoute[];
-  // 多页签首页
+  /** 多页签首页 */
   homeTab: GlobalTabRoute;
-  // 当前激活状态的页签(路由fullPath)
+  /** 当前激活状态的页签(路由fullPath) */
   activeTab: string;
 }
 
@@ -38,31 +38,31 @@ export const useTabStore = defineStore('tab-store', {
     activeTab: ''
   }),
   getters: {
-    // 当前激活状态的页签索引
+    /** 当前激活状态的页签索引 */
     activeTabIndex(state) {
       const { tabs, activeTab } = state;
       return tabs.findIndex(tab => tab.fullPath === activeTab);
     }
   },
   actions: {
-    // 重置Tab状态
+    /** 重置Tab状态 */
     resetTabStore() {
       clearTabRoutes();
       this.$reset();
     },
-    // 缓存页签路由数据
+    /** 缓存页签路由数据 */
     cacheTabRoutes() {
       setTabRoutes(this.tabs);
     },
     /**
-     * 设置当前路由对应的页签为激活状态
+     * @description 设置当前路由对应的页签为激活状态
      * @param fullPath - 路由fullPath
      */
     setActiveTab(fullPath: string) {
       this.activeTab = fullPath;
     },
     /**
-     * 设置当前路由对应的页签title
+     * @description 设置当前路由对应的页签title
      * @param title - tab名称
      */
     setActiveTabTitle(title: string) {
@@ -72,7 +72,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * 初始化首页页签路由
+     * @description 初始化首页页签路由
      * @param routeHomeName - 路由首页的name
      * @param router - 路由实例
      */
@@ -85,7 +85,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * 添加多页签
+     * @description 添加多页签
      * @param route - 路由
      */
     addTab(route: RouteLocationNormalizedLoaded) {
@@ -111,7 +111,7 @@ export const useTabStore = defineStore('tab-store', {
       this.tabs.push(tab);
     },
     /**
-     * 删除多页签
+     * @description 删除多页签
      * @param fullPath - 路由fullPath
      */
     removeTab(fullPath: string) {
@@ -127,7 +127,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * 清空多页签(多页签首页保留)
+     * @description 清空多页签(多页签首页保留)
      * @param excludes - 保留的多页签path
      */
     clearTab(excludes: string[] = []) {
@@ -145,7 +145,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * 清除左边多页签
+     * @description 清除左边多页签
      * @param fullPath - 路由fullPath
      */
     clearLeftTab(fullPath: string) {
@@ -156,7 +156,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * 清除右边多页签
+     * @description 清除右边多页签
      * @param fullPath - 路由fullPath
      */
     clearRightTab(fullPath: string) {
@@ -171,7 +171,7 @@ export const useTabStore = defineStore('tab-store', {
       this.clearTab();
     },
     /**
-     * 点击单个tab
+     * @description 点击单个tab
      * @param fullPath - 路由fullPath
      */
     handleClickTab(fullPath: string) {
@@ -184,7 +184,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * 记录tab滚动位置
+     * @description 记录tab滚动位置
      * @param fullPath - 路由fullPath
      * @param position - tab当前页的滚动位置
      */
@@ -195,7 +195,7 @@ export const useTabStore = defineStore('tab-store', {
       }
     },
     /**
-     * 获取tab滚动位置
+     * @description 获取tab滚动位置
      * @param fullPath - 路由fullPath
      */
     getTabScrollPosition(fullPath: string) {

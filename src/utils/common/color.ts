@@ -36,14 +36,17 @@ export function getColorPalette(color: string, index: ColorIndex) {
   return colord(newHsv).toHex();
 }
 
-// 根据颜色获取调色板颜色所有颜色
+/**
+ * @description 根据颜色获取调色板颜色所有颜色
+ * @param color - 颜色
+ */
 export function getAllColorPalette(color: string) {
   const indexs: ColorIndex[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return indexs.map(index => getColorPalette(color, index));
 }
 
 /**
- * 获取色相渐变
+ * @description 获取色相渐变
  * @param hsv - hsv格式颜色值
  * @param i - 与6的相对距离
  * @param isLight - 是否是亮颜色
@@ -70,7 +73,7 @@ function getHue(hsv: HsvColor, i: number, isLight: boolean) {
 }
 
 /**
- * 获取饱和度渐变
+ * @description 获取饱和度渐变
  * @param hsv - hsv格式颜色值
  * @param i - 与6的相对距离
  * @param isLight - 是否是亮颜色
@@ -97,7 +100,7 @@ function getSaturation(hsv: HsvColor, i: number, isLight: boolean) {
 }
 
 /**
- * 获取明度渐变
+ * @description 获取明度渐变
  * @param hsv - hsv格式颜色值
  * @param i - 与6的相对距离
  * @param isLight - 是否是亮颜色
@@ -116,7 +119,7 @@ function getValue(hsv: HsvColor, i: number, isLight: boolean) {
 }
 
 /**
- * 给颜色加透明度
+ * @description 给颜色加透明度
  * @param color - 颜色
  * @param alpha - 透明度(0 - 1)
  */
@@ -125,7 +128,7 @@ export function addColorAlpha(color: string, alpha: number) {
 }
 
 /**
- * 颜色混合
+ * @description 颜色混合
  * @param firstColor - 第一个颜色
  * @param secondColor - 第二个颜色
  * @param ratio - 第二个颜色占比
@@ -134,7 +137,10 @@ export function mixColor(firstColor: string, secondColor: string, ratio: number)
   return colord(firstColor).mix(secondColor, ratio).toHex();
 }
 
-// 是否是白颜色
+/**
+ * @description 是否是白颜色
+ * @param color - 颜色
+ */
 export function isWhiteColor(color: string) {
   return colord(color).isEqual('#ffffff');
 }

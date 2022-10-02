@@ -1,7 +1,7 @@
 /**
- * @Description vite配置
- * @Author luomingfeng
- * @Date 2022/3/10 22:06
+ * @description vite配置
+ * @author luomingfeng
+ * @date 2022/3/10 22:06
  */
 import { defineConfig, loadEnv } from 'vite';
 import { getRootPath, getSrcPath, createViteProxy, setupVitePlugins } from './build';

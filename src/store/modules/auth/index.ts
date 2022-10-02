@@ -1,7 +1,7 @@
 /**
- * @Description 用户相关
- * @Author luomingfeng
- * @Date 2022/4/17 15:18
+ * @description 用户相关
+ * @author luomingfeng
+ * @date 2022/4/17 15:18
  */
 
 import { router as globalRouter } from '@/router';
@@ -11,11 +11,11 @@ import { useRouterPush } from '@/composables';
 import { fetchLogin } from '@/service/api';
 
 interface AuthState {
-  // 用户信息
+  /** 用户信息 */
   userInfo: Auth.UserInfo;
-  // 用户token
+  /** 用户token */
   token: string;
-  // 登录的加载状态
+  /** 登录的加载状态 */
   loading: boolean;
 }
 
@@ -26,13 +26,13 @@ export const useAuthStore = defineStore('auth-store', {
     loading: false
   }),
   getters: {
-    // 是否登录
+    /** 是否登录 */
     isLogin(state) {
       return Boolean(state.token);
     }
   },
   actions: {
-    // 登录
+    /** 登录 */
     async login(username: string, password: string) {
       this.loading = true;
 
@@ -64,7 +64,7 @@ export const useAuthStore = defineStore('auth-store', {
         await this.resetAuthStore();
       }
     },
-    // 重置状态
+    /** 重置auth状态 */
     async resetAuthStore() {
       const { routerPush } = useRouterPush(false);
       const route = unref(globalRouter.currentRoute);

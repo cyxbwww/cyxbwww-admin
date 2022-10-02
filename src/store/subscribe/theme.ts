@@ -5,7 +5,7 @@ import { kebabCase } from 'lodash-es';
 import { useThemeStore } from '@/store';
 import { setThemeColor } from '@/utils';
 
-// 订阅theme store
+/** 订阅theme store */
 export default function subscribeThemeStore() {
   const theme = useThemeStore();
   const osTheme = useOsTheme();
@@ -93,7 +93,7 @@ function handleCssDarkMode() {
 type ThemeVars = Exclude<GlobalThemeOverrides['common'], undefined>;
 type ThemeVarsKeys = keyof ThemeVars;
 
-// 添加css vars至html
+/** 添加css vars至html */
 function addThemeCssVarsToHtml(themeVars: ThemeVars) {
   const keys = Object.keys(themeVars) as ThemeVarsKeys[];
   const style: string[] = [];

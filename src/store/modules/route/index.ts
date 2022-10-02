@@ -1,6 +1,6 @@
 import type { Router } from 'vue-router';
 import { defineStore } from 'pinia';
-import { ROOT_ROUTE, router, routes as staticRoutes } from '@/router';
+import { ROOT_ROUTE, constantRoutes, router, routes as staticRoutes } from '@/router';
 import { useAuthStore, useTabStore } from '@/store';
 import {
   getUserInfo,
@@ -9,7 +9,8 @@ import {
   transformAuthRoutesToSearchMenus,
   transformRouteNameToRoutePath,
   transformAuthRouteToVueRoute,
-  transformRoutePathToRouteName
+  transformRoutePathToRouteName,
+  getConstantRouteNames
 } from '@/utils';
 import { filterAuthRoutesByUserPermission } from '@/utils';
 import { fetchUserRoutes } from '@/service/api';
@@ -21,15 +22,15 @@ interface RouteState {
    * - dynamic - 后端返回的动态
    */
   authRouteMode: ImportMetaEnv['VITE_AUTH_ROUTE_MODE'];
-  // 是否初始化了权限路由
+  /** 是否初始化了权限路由 */
   isInitAuthRoute: boolean;
-  // 路由首页name(前端静态路由时生效，后端动态路由该值会被后端返回的值覆盖)
+  /** 路由首页name(前端静态路由时生效，后端动态路由该值会被后端返回的值覆盖) */
   routeHomeName: AuthRoute.RouteKey;
-  // 菜单
+  /** 菜单 */
   menus: GlobalMenuOption[];
-  // 搜索的菜单
+  /** 搜索的菜单 */
   searchMenus: AuthRoute.Route[];
-  // 缓存的路由名称
+  /** 缓存的路由名称 */
   cacheRoutes: string[];
 }
 
@@ -43,7 +44,19 @@ export const useRouteStore = defineStore('route-store', {
     cacheRoutes: []
   }),
   actions: {
-    // 处理权限路由
+    /**
+     * @description 是否是有效的固定路由
+     * @param name 路由名称
+     */
+    isValidConstantRoute(name: AuthRoute.RouteKey) {
+      const NOT_FOUND_PAGE_NAME: AuthRoute.RouteKey = 'not-found-page';
+      const constantRouteNames = getConstantRouteNames(constantRoutes);
+      return constantRouteNames.includes(name) && name !== NOT_FOUND_PAGE_NAME;
+    },
+    /**
+     * @description 处理权限路由
+     * @param routes - 权限路由
+     */
     handleAuthRoutes(routes: AuthRoute.Route[]) {
       this.menus = transformAuthRouteToMenu(routes);
       this.searchMenus = transformAuthRoutesToSearchMenus(routes);
@@ -53,7 +66,7 @@ export const useRouteStore = defineStore('route-store', {
         router.addRoute(route);
       });
     },
-    // 动态路由模式下：更新根路由的重定向
+    /** 动态路由模式下：更新根路由的重定向 */
     handleUpdateRootRedirect(routeKey: AuthRoute.RouteKey) {
       if (routeKey === 'root' || routeKey === 'not-found-page') {
         throw new Error('routeKey的值不能为root或者not-found-page');
@@ -64,7 +77,7 @@ export const useRouteStore = defineStore('route-store', {
       const rootVueRoute = transformAuthRouteToVueRoute(rootRoute)[0];
       router.addRoute(rootVueRoute);
     },
-    // 初始化动态路由
+    /** 初始化动态路由 */
     async initDynamicRoute() {
       const { userId } = getUserInfo();
       const { data } = await fetchUserRoutes(userId);
@@ -74,13 +87,13 @@ export const useRouteStore = defineStore('route-store', {
         this.handleAuthRoutes(data.routes);
       }
     },
-    // 初始化静态路由
+    /** 初始化静态路由 */
     async initStaticRoute() {
       const auth = useAuthStore();
       const routes = filterAuthRoutesByUserPermission(staticRoutes, auth.userInfo.userRole);
       this.handleAuthRoutes(routes);
     },
-    // 初始化权限路由
+    /** 初始化权限路由 */
     async initAuthRoute() {
       const { initHomeTab } = useTabStore();
       const { userId } = getUserInfo();

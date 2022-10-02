@@ -1,7 +1,7 @@
 /**
- * @Description axios请求
- * @Author luomingfeng
- * @Date 2022/4/15 20:49
+ * @description axios请求
+ * @author luomingfeng
+ * @date 2022/4/15 20:49
  */
 import { getEnvConfig } from '~/.env-config';
 import { createRequest } from './request';

@@ -5,11 +5,11 @@ interface Window {
   $notification?: import('naive-ui').NotificationProviderInst;
 }
 
-// 通用类型
+/** 通用类型 */
 declare namespace Common {
-  /*
+  /**
    * 策略模式
-   * [状态, 为 true 时执行的回调函数]
-   * */
+   * [状态, 为true时执行的回调函数]
+   */
   type StrategyAction = [boolean, () => void];
 }

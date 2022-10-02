@@ -1,27 +1,25 @@
-// http 请求头的 content-type 类型
+/** http 请求头的 content-type 类型 */
 export enum EnumContentType {
   json = 'application/json; charset=UTF-8',
   formUrlencoded = 'application/x-www-form-urlencoded',
   formData = 'multipart/form-data'
 }
 
-// 缓存的key
+/** 缓存的key */
 export enum EnumStorageKey {
-  // 主题颜色
+  /** 主题颜色 */
   'theme-color' = '__THEME_COLOR__',
-  // 用户token
+  /** 用户token */
   'token' = '__TOKEN__',
-  // 用户刷新token
-  'refresh-token' = '__REFRESH_TOKEN__',
-  // 用户信息
+  /** 用户信息 */
   'user-info' = '__USER_INFO__',
-  // 多页签路由信息
+  /** 多页签路由信息 */
   'multi-tab-routes' = '__MULTI_TAB_ROUTES__',
-  // 主题配置
+  /** 主题配置 */
   'theme-settings' = '__THEME_SETTINGS__'
 }
 
-// 数据类型
+/** 数据类型 */
 export enum EnumDataType {
   number = '[object Number]',
   string = '[object String]',
@@ -33,5 +31,6 @@ export enum EnumDataType {
   date = '[object Date]',
   regexp = '[object RegExp]',
   set = '[object Set]',
-  map = '[object Map]'
+  map = '[object Map]',
+  file = '[object File]'
 }

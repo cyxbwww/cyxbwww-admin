@@ -1,7 +1,7 @@
 <!--
- * @Description 页面说明
- * @Author luomingfeng
- * @Date 2022/8/31 21:53
+ * @description 页面说明
+ * @author luomingfeng
+ * @date 2022/8/31 21:53
 -->
 <template>
   <div>分析页</div>
