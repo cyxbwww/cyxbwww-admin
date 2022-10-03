@@ -30,6 +30,14 @@ interface ImportMetaEnv {
   readonly VITE_AUTH_ROUTE_MODE: 'static' | 'dynamic';
   /** 路由首页的路径 */
   readonly VITE_ROUTE_HOME_PATH: Exclude<AuthRoute.RoutePath, '/' | '/not-found-page' | '/:pathMatch(.*)*'>;
+  /** iconify图标作为组件的前缀 */
+  readonly VITE_ICON_PREFFIX: string;
+  /**
+   * 本地SVG图标作为组件的前缀, 请注意一定要包含 VITE_ICON_PREFFIX
+   * - 格式 {VITE_ICON_PREFFIX}-{本地图标集合名称}
+   * - 例如：icon-local
+   */
+  readonly VITE_ICON_LOCAL_PREFFIX: string;
   /** 是否开启打包文件大小结果分析 */
   readonly VITE_VISUALIZER?: 'Y' | 'N';
 }

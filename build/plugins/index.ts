@@ -9,7 +9,7 @@ import unplugin from './unplugin';
  * @param viteEnv - 环境变量配置
  */
 export function setupVitePlugins(viteEnv: ImportMetaEnv): (PluginOption | PluginOption[])[] {
-  const plugins = [vue, ...unplugin(), unocss];
+  const plugins = [vue, ...unplugin(viteEnv), unocss];
 
   if (viteEnv.VITE_VISUALIZER === 'Y') {
     plugins.push(visualizer);

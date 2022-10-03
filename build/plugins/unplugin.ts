@@ -8,42 +8,51 @@ import { FileSystemIconLoader } from 'unplugin-icons/loaders';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import { getSrcPath } from '../utils';
 
-const srcPath = getSrcPath();
+export default (viteEnv: ImportMetaEnv) => {
+  const { VITE_ICON_PREFFIX, VITE_ICON_LOCAL_PREFFIX } = viteEnv;
 
-const customIconPath = `${srcPath}/assets/svg`;
+  const srcPath = getSrcPath();
+  const localIconPath = `${srcPath}/assets/svg-icon`;
 
-export default () => {
+  /** 本地svg图标集合名称 */
+  const collectionName = VITE_ICON_LOCAL_PREFFIX.replace(`${VITE_ICON_PREFFIX}-`, '');
+
   return [
     DefineOptions(),
     Icons({
       compiler: 'vue3',
       customCollections: {
-        custom: FileSystemIconLoader(customIconPath)
+        [collectionName]: FileSystemIconLoader(localIconPath)
       },
       scale: 1,
       defaultClass: 'inline-block'
     }),
     AutoImport({
-      dts: './src/typings/auto-imports.d.ts',
+      dts: 'src/typings/auto-imports.d.ts',
       imports: ['vue', 'vue-router', 'pinia'],
       eslintrc: {
         enabled: true,
         filepath: './.eslintrc-auto-import.json',
         globalsPropValue: true
       },
-      resolvers: [NaiveUiResolver(), IconsResolver({ customCollections: ['custom'], componentPrefix: 'icon' })]
+      resolvers: [
+        NaiveUiResolver(),
+        IconsResolver({ customCollections: [collectionName], componentPrefix: VITE_ICON_PREFFIX })
+      ]
     }),
     Components({
-      dts: './src/typings/components.d.ts',
-      dirs: ['src/components'],
+      dts: 'src/typings/components.d.ts',
       types: [{ from: 'vue-router', names: ['RouterLink', 'RouterView'] }],
-      resolvers: [NaiveUiResolver(), IconsResolver({ customCollections: ['custom'], componentPrefix: 'icon' })]
+      resolvers: [
+        NaiveUiResolver(),
+        IconsResolver({ customCollections: [collectionName], componentPrefix: VITE_ICON_PREFFIX })
+      ]
     }),
     createSvgIconsPlugin({
-      iconDirs: [customIconPath],
-      symbolId: 'icon-custom-[dir]-[name]',
+      iconDirs: [localIconPath],
+      symbolId: `${VITE_ICON_LOCAL_PREFFIX}-[dir]-[name]`,
       inject: 'body-last',
-      customDomId: '__CUSTOM_SVG_ICON__'
+      customDomId: '__SVG_ICON_LOCAL__'
     })
   ];
 };
