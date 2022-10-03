@@ -37,19 +37,19 @@ $ git clone https://github.com/honghuangdc/soybean-admin.git
 ```
 
 - 安装依赖
-  ``` sh
-  npm i
-  ```
+``` sh
+$ npm i
+```
 
 - 运行
-  ``` sh
-  npm run dev
-  ```
+``` sh
+$ npm run dev
+```
 
 - 打包
-  ``` sh
-  npm run build
-  ```
+``` sh
+$ npm run build
+ ```
 
 ## 开源作者
 
