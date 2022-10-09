@@ -37,6 +37,22 @@ export function useRouterPush(inSetup = true) {
   }
 
   /**
+   * 跳转登录页面
+   * @param loginModule - 展示的登录模块
+   * @param redirectUrl - 重定向地址(登录成功后跳转的地址),默认undefined表示取当前地址为重定向地址
+   */
+  function toLogin(loginModule?: EnumType.LoginModuleKey, redirectUrl?: string) {
+    const module: EnumType.LoginModuleKey = loginModule || 'pwd-login';
+    const routeLocation: RouteLocationRaw = {
+      name: routeName('login'),
+      params: { module }
+    };
+    const redirect = redirectUrl || route.value.fullPath;
+    Object.assign(routeLocation, { query: { redirect } });
+    routerPush(routeLocation);
+  }
+
+  /**
    * 登录页切换其他模块
    * @param module - 切换后的登录模块
    */
@@ -59,6 +75,7 @@ export function useRouterPush(inSetup = true) {
     routerPush,
     routerBack,
     toHome,
+    toLogin,
     toLoginModule,
     toLoginRedirect
   };

@@ -5,10 +5,11 @@
  */
 
 import { router as globalRouter } from '@/router';
-import { routeName } from '@/router';
+import { useRouteStore } from '@/store';
 import { fetchLogin } from '@/service';
 import { setUserInfo, setToken, getUserInfo, getToken, clearAuthStorage } from '@/utils';
 import { useRouterPush } from '@/composables';
+import { useTabStore } from '../tab';
 
 interface AuthState {
   /** 用户信息 */
@@ -59,26 +60,27 @@ export const useAuthStore = defineStore('auth-store', {
           content: `欢迎回来，${userInfo.userName}!`,
           duration: 3000
         });
-      } else {
-        // 重置状态
-        await this.resetAuthStore();
+
+        return;
       }
+
+      // 不成功则重置状态
+      await this.resetAuthStore();
     },
     /** 重置auth状态 */
     async resetAuthStore() {
-      const { routerPush } = useRouterPush(false);
+      const { toLogin } = useRouterPush(false);
+      const { resetTabStore } = useTabStore();
+      const { resetRouteStore } = useRouteStore();
       const route = unref(globalRouter.currentRoute);
-      const { query } = route;
+
+      resetTabStore();
+      resetRouteStore();
 
       clearAuthStorage();
       this.$reset();
       if (route.meta.requiresAuth) {
-        await routerPush({
-          name: routeName('login'),
-          query: {
-            redirect: query?.redirect as string
-          }
-        });
+        toLogin();
       }
     }
   }

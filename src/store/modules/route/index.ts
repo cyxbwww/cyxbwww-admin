@@ -44,6 +44,29 @@ export const useRouteStore = defineStore('route-store', {
     cacheRoutes: []
   }),
   actions: {
+    /** 重置路由的store */
+    resetRouteStore() {
+      this.resetRoutes();
+      this.$reset();
+    },
+    /** 重置路由数据，保留固定路由 */
+    resetRoutes() {
+      const routes = router.getRoutes();
+      routes.forEach(route => {
+        const name: AuthRoute.RouteKey = (route.name || 'root') as AuthRoute.RouteKey;
+        if (!this.isConstantRoute(name)) {
+          router.removeRoute(name);
+        }
+      });
+    },
+    /**
+     * 是否是固定路由
+     * @param name 路由名称
+     */
+    isConstantRoute(name: AuthRoute.RouteKey) {
+      const constantRouteNames = getConstantRouteNames(constantRoutes);
+      return constantRouteNames.includes(name);
+    },
     /**
      * 是否是有效的固定路由
      * @param name 路由名称
