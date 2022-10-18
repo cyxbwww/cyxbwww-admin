@@ -3,9 +3,12 @@
  * @author luomingfeng
  * @date 2022/5/1 11:37
  */
+import { createDiscreteApi } from 'naive-ui';
 import type { AxiosInstance, AxiosRequestConfig, AxiosError } from 'axios';
 import axios from 'axios';
+import { useAuthStore, useRouteStore, useTabStore } from '@/store';
 import {
+  clearAuthStorage,
   getToken,
   handleAxiosError,
   handleBackendError,
@@ -13,6 +16,7 @@ import {
   handleServiceResult,
   transformRequestData
 } from '@/utils';
+import { useRouterPush } from '@/composables';
 
 /**
  * @param axiosConfig - axios配置
@@ -67,6 +71,31 @@ export default class CustomAxiosInstance {
           // 请求成功
           if (backend[codeKey] === successCode) {
             return handleServiceResult(null, backend[dataKey]);
+          }
+
+          // token失效
+          if (backend[codeKey] === 2000) {
+            const auth = useAuthStore();
+            const { resetTabStore } = useTabStore();
+            const { resetRouteStore } = useRouteStore();
+            const { toLogin } = useRouterPush(false);
+            const { dialog } = createDiscreteApi(['dialog']);
+
+            dialog.info({
+              title: '提示',
+              content: '登录失效，请重新登录',
+              positiveText: '确定',
+              maskClosable: false,
+              onPositiveClick: () => {
+                resetTabStore();
+                resetRouteStore();
+
+                clearAuthStorage();
+                auth.$reset();
+
+                toLogin('pwd-login', '/dashboard/analysis');
+              }
+            });
           }
 
           const error = handleBackendError(backend, this.backendConfig);
