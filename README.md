@@ -24,6 +24,7 @@
 
 ## 后端服务
 
+- [cyxbwww-admin-eggjs(开发中)](https://github.com/cyxbwww/cyxbwww-admin-eggjs)
 - [cyxbwww-admin-nestjs(开发中)](https://github.com/cyxbwww/cyxbwww-admin-nestjs)
 
 ## 安装使用
