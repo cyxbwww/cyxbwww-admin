@@ -1,4 +1,4 @@
-// 用户相关模块
+/** 用户相关模块 */
 declare namespace Auth {
   /**
    * 用户角色类型(前端静态路由用角色类型进行路由权限的控制)
@@ -16,5 +16,14 @@ declare namespace Auth {
     userName: string;
     // 用户角色类型
     userRole: RoleType;
+  }
+}
+
+declare namespace UserManagement {
+  interface User extends ApiUserManagement.User {
+    /** 序号 */
+    index: number;
+    /** 表格的key（id） */
+    key: string;
   }
 }

@@ -18,3 +18,24 @@ declare namespace ApiRoute {
     home: AuthRoute.RouteKey;
   }
 }
+
+declare namespace ApiUserManagement {
+  interface User {
+    /** 用户id */
+    id: string;
+    /** 用户名 */
+    name: string | null;
+    /** 用户手机号码 */
+    phone: string;
+    /** 用户邮箱 */
+    email: string | null;
+    /**
+     * 用户状态
+     * - 1: 启用
+     * - 2: 禁用
+     * - 3: 冻结
+     * - 4: 软删除
+     */
+    status: '1' | '2' | '3' | '4' | null;
+  }
+}

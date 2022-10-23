@@ -6,7 +6,7 @@ import { request } from '@/service/request';
  * @param password - 密码
  */
 export async function fetchLogin(username: string, password: string) {
-  return request.post<ApiAuth.UserInfo>('/user/login', { username, password });
+  return request.post<ApiAuth.UserInfo>('/auth/login', { username, password });
 }
 
 /**
@@ -15,5 +15,5 @@ export async function fetchLogin(username: string, password: string) {
  * @description 后端根据用户id查询到对应的角色类型，并将路由筛选出对应角色的路由数据返回前端
  */
 export async function fetchUserRoutes(userId: string) {
-  return request.post<ApiRoute.Route>('/user/getUserRoutes', { userId });
+  return request.post<ApiRoute.Route>('/auth/getUserRoutes', { userId });
 }
