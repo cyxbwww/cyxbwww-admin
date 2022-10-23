@@ -1,4 +1,3 @@
-import type { Router } from 'vue-router';
 import { defineStore } from 'pinia';
 import { ROOT_ROUTE, constantRoutes, router, routes as staticRoutes } from '@/router';
 import { useAuthStore, useTabStore } from '@/store';
@@ -108,6 +107,7 @@ export const useRouteStore = defineStore('route-store', {
         this.routeHomeName = data.home;
         this.handleUpdateRootRedirect(data.home);
         this.handleAuthRoutes(data.routes);
+        this.isInitAuthRoute = true;
       }
     },
     /** 初始化静态路由 */
@@ -115,6 +115,7 @@ export const useRouteStore = defineStore('route-store', {
       const auth = useAuthStore();
       const routes = filterAuthRoutesByUserPermission(staticRoutes, auth.userInfo.userRole);
       this.handleAuthRoutes(routes);
+      this.isInitAuthRoute = true;
     },
     /** 初始化权限路由 */
     async initAuthRoute() {
@@ -124,6 +125,7 @@ export const useRouteStore = defineStore('route-store', {
       if (!userId) return;
 
       const isDynamicRoute = this.authRouteMode === 'dynamic';
+
       if (isDynamicRoute) {
         await this.initDynamicRoute();
       } else {
@@ -131,8 +133,6 @@ export const useRouteStore = defineStore('route-store', {
       }
 
       initHomeTab(this.routeHomeName, router);
-
-      this.isInitAuthRoute = true;
     }
   }
 });

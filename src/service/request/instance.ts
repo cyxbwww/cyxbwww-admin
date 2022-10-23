@@ -75,31 +75,22 @@ export default class CustomAxiosInstance {
 
           // token失效
           if (backend[codeKey] === 2000) {
+            const tab = useTabStore();
+            const route = useRouteStore();
             const auth = useAuthStore();
-            const { resetTabStore } = useTabStore();
-            const { resetRouteStore } = useRouteStore();
-            const { toLogin } = useRouterPush(false);
-            const { dialog } = createDiscreteApi(['dialog']);
+            const { message } = createDiscreteApi(['message']);
 
-            dialog.info({
-              title: '提示',
-              content: '登录失效，请重新登录',
-              positiveText: '确定',
-              maskClosable: false,
-              onPositiveClick: () => {
-                resetTabStore();
-                resetRouteStore();
+            message.warning('请重新登录');
 
-                clearAuthStorage();
-                auth.$reset();
+            tab.resetTabStore();
+            route.resetRouteStore();
 
-                toLogin('pwd-login', '/dashboard/analysis');
-              }
-            });
+            clearAuthStorage();
+            auth.$reset();
+          } else {
+            const error = handleBackendError(backend, this.backendConfig);
+            return handleServiceResult(error, null);
           }
-
-          const error = handleBackendError(backend, this.backendConfig);
-          return handleServiceResult(error, null);
         }
 
         const error = handleResponseError(response);
