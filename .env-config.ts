@@ -10,19 +10,19 @@ type ServiceEnv = Record<ServiceEnvType, ServiceEnvConfig>;
 /** 不同请求服务的环境配置 */
 const serviceEnvConfig: ServiceEnv = {
   dev: {
-    url: 'http://localhost:7001',
+    url: 'http://localhost:3000',
     proxy: '/api'
   },
   test: {
-    url: 'http://localhost:7001',
+    url: 'http://localhost:3000',
     proxy: '/api'
   },
   pre: {
-    url: 'http://localhost:7001',
+    url: 'http://localhost:3000',
     proxy: '/api'
   },
   prod: {
-    url: 'http://localhost:7001',
+    url: 'http://localhost:3000',
     proxy: '/api'
   }
 };

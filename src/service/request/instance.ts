@@ -16,7 +16,6 @@ import {
   handleServiceResult,
   transformRequestData
 } from '@/utils';
-import { useRouterPush } from '@/composables';
 
 /**
  * @param axiosConfig - axios配置
@@ -32,7 +31,7 @@ export default class CustomAxiosInstance {
       codeKey: 'code',
       dataKey: 'data',
       msgKey: 'message',
-      successCode: 0
+      successCode: 200
     }
   ) {
     this.instance = axios.create(axiosConfig);
@@ -50,7 +49,7 @@ export default class CustomAxiosInstance {
           const contentType = handleConfig.headers['Content-Type'] as string;
           handleConfig.data = await transformRequestData(handleConfig.data, contentType);
           // 设置token
-          handleConfig.headers.Authorization = getToken();
+          handleConfig.headers.Authorization = `Bearer ${getToken()}`;
         }
         return handleConfig;
       },
@@ -74,7 +73,7 @@ export default class CustomAxiosInstance {
           }
 
           // token失效
-          if (backend[codeKey] === 2000) {
+          if (backend[codeKey] === 10009) {
             const tab = useTabStore();
             const route = useRouteStore();
             const auth = useAuthStore();

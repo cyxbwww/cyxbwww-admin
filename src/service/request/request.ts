@@ -13,10 +13,17 @@ interface RequestParam {
 export function createRequest(axiosConfig: AxiosRequestConfig) {
   const customInstance = new CustomAxiosInstance(axiosConfig);
 
-  async function asyncRequest<T>(param: RequestParam) {
-    const { config, data, url, method = 'get' } = param;
+  async function asyncRequest<T>(param: RequestParam): Promise<Service.RequestResult<T>> {
+    const { url } = param;
+    const method = param.method || 'get';
     const { instance } = customInstance;
-    return await getRequestResponse(instance, method, url, data, config);
+    return (await getRequestResponse({
+      instance,
+      method,
+      url,
+      data: param.data,
+      config: param.config
+    })) as Service.RequestResult<T>;
   }
 
   function get<T>(url: string, config?: AxiosRequestConfig) {
@@ -43,13 +50,14 @@ export function createRequest(axiosConfig: AxiosRequestConfig) {
   };
 }
 
-async function getRequestResponse(
-  instance: AxiosInstance,
-  method: RequestMethod,
-  url: string,
-  data?: any,
-  config?: AxiosRequestConfig
-) {
+async function getRequestResponse(params: {
+  instance: AxiosInstance;
+  method: RequestMethod;
+  url: string;
+  data?: any;
+  config?: AxiosRequestConfig;
+}) {
+  const { instance, method, url, data, config } = params;
   return ['get', 'delete'].includes(method)
     ? await instance[method](url, config)
     : await instance[method](url, data, config);

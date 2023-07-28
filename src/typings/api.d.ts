@@ -24,9 +24,11 @@ declare namespace ApiUserManagement {
     /** 用户id */
     id: string;
     /** 用户名 */
-    name: string | null;
+    userName: string | null;
+    /** 用户密码 */
+    password: string | null;
     /** 用户手机号码 */
-    phone: string;
+    phone: string | null;
     /** 用户邮箱 */
     email: string | null;
     /**
@@ -36,6 +38,17 @@ declare namespace ApiUserManagement {
      * - 3: 冻结
      * - 4: 软删除
      */
-    status: '1' | '2' | '3' | '4' | null;
+    userStatus: '1' | '2' | '3' | '4' | null;
+    /** 用户角色 */
+    userRoleIds: [] | null;
+  }
+}
+
+declare namespace ApiRoleManagment {
+  interface Role {
+    /** 角色id */
+    id: string;
+    /** 角色名称 */
+    name: string;
   }
 }

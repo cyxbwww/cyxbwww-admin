@@ -2,7 +2,11 @@ import unocss from 'unocss/vite';
 import { presetUno } from 'unocss';
 
 export default unocss({
-  exclude: ['node_modules', '.git', 'dist', './stats.html'],
+  content: {
+    pipeline: {
+      exclude: ['node_modules', 'dist', '.git', '.husky', '.vscode', 'public', 'build', './stats.html']
+    }
+  },
   presets: [presetUno()],
   shortcuts: {
     'wh-full': 'w-full h-full',

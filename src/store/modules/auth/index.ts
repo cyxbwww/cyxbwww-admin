@@ -34,11 +34,12 @@ export const useAuthStore = defineStore('auth-store', {
   },
   actions: {
     /** 登录 */
-    async login(username: string, password: string) {
+    async login(userName: string, password: string) {
       this.loading = true;
 
+      const route = useRouteStore();
       const { toLoginRedirect } = useRouterPush(false);
-      const { data } = await fetchLogin(username, password);
+      const { data } = await fetchLogin(userName, password);
 
       this.loading = false;
 
@@ -51,15 +52,19 @@ export const useAuthStore = defineStore('auth-store', {
         // 更新状态
         Object.assign(this, { userInfo, token });
 
+        await route.initAuthRoute();
+
         // 跳转登录后的地址
         toLoginRedirect();
 
         // 欢迎提示
-        window.$notification?.success({
-          title: '登录成功!',
-          content: `欢迎回来，${userInfo.userName}!`,
-          duration: 3000
-        });
+        if (route.isInitAuthRoute) {
+          window.$notification?.success({
+            title: '登录成功!',
+            content: `欢迎回来，${userInfo.userName}!`,
+            duration: 3000
+          });
+        }
 
         return;
       }

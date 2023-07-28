@@ -18,7 +18,8 @@
       // TS需要引用的库
       "esnext",
       "dom"
-    ]
+    ],
+    "jsx": "preserve"
   },
   "include": [
     // 指定需要编译的文件或文件夹
