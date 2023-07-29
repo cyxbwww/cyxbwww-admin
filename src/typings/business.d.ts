@@ -36,3 +36,12 @@ declare namespace UserManagement {
    */
   type UserStatusKey = NonNullable<User['userStatus']>;
 }
+
+declare namespace RoleManagement {
+  interface Role extends ApiRoleManagment.Role {
+    /** 序号 */
+    index: number;
+    /** 表格的key（id） */
+    key: string;
+  }
+}

@@ -14,3 +14,8 @@ export const fetchCreateUser = async data => {
 export const fetchUpdateUser = async data => {
   return request.post<ApiUserManagement.User[] | null>('/user/updateUser', data);
 };
+
+/** 删除用户 */
+export const fetchDeleteUser = async data => {
+  return request.post<ApiUserManagement.User[] | null>('/user/deleteUser', data);
+};

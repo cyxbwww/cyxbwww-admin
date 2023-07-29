@@ -49,6 +49,8 @@ declare namespace ApiRoleManagment {
     /** 角色id */
     id: string;
     /** 角色名称 */
-    name: string;
+    name: string | null;
+    /** 角色权限 */
+    permissionIds: [] | null;
   }
 }

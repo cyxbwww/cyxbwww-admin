@@ -32,7 +32,7 @@
 <script setup lang="tsx">
 import { Ref } from 'vue';
 import { DataTableColumns, PaginationProps } from 'naive-ui';
-import { fetchUserList } from '@/service';
+import { fetchUserList, fetchDeleteUser } from '@/service';
 import { userStatusLabels } from '@/constants';
 import { useBoolean } from '@/hooks';
 import TableActionModal from './components/table-action-modal.vue';
@@ -122,7 +122,7 @@ const pagination: PaginationProps = reactive({
     getTableData();
   }
 });
-const params = reactive<UserManagement.User>({
+const params = reactive({
   page: toRef(pagination, 'page'),
   pageSize: toRef(pagination, 'pageSize')
 });
@@ -159,8 +159,11 @@ async function handleEditTable(userId) {
   openModal();
 }
 
-async function handleDeleteTable() {
-  console.log('====');
+async function handleDeleteTable(userId) {
+  const { data } = await fetchDeleteUser({ userId });
+  if (data) {
+    await getTableData();
+  }
 }
 
 function setTableData(data: UserManagement.User[]) {
