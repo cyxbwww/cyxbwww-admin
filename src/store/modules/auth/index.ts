@@ -20,7 +20,7 @@ interface AuthState {
   loading: boolean;
 }
 
-export const useAuthStore = defineStore('auth-store', {
+export const useAuthStore = defineStore('permission-store', {
   state: (): AuthState => ({
     userInfo: getUserInfo(),
     token: getToken(),

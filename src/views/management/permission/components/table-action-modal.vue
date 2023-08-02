@@ -2,28 +2,11 @@
   <n-modal v-model:show="modalVisible" preset="card" :mask-closable="false" :title="title" class="w-700px">
     <n-form ref="formRef" label-placement="left" :label-width="80" :model="formModel" :rules="rules">
       <n-grid :cols="24" :x-gap="18">
-        <n-form-item-grid-item :span="12" label="角色名" path="name">
+        <n-form-item-grid-item :span="12" label="权限名" path="name">
           <n-input v-model:value="formModel.name" />
         </n-form-item-grid-item>
-        <n-form-item-grid-item :span="12" label="权限" path="permissionIds">
-          <n-select
-            v-model:value="formModel.permissionIds"
-            multiple
-            label-field="desc"
-            value-field="id"
-            :options="permissionOption"
-          />
-        </n-form-item-grid-item>
-        <n-form-item-grid-item :span="12" label="路由" path="routeIds">
-          <n-tree-select
-            v-model:value="formModel.routeIds"
-            key-field="id"
-            label-field="title"
-            multiple
-            cascade
-            checkable
-            :options="routeOption"
-          />
+        <n-form-item-grid-item :span="12" label="权限简介" path="desc">
+          <n-input v-model:value="formModel.desc" />
         </n-form-item-grid-item>
       </n-grid>
       <n-space class="w-full pt-16px" :size="24" justify="end">
@@ -36,7 +19,7 @@
 
 <script setup lang="ts">
 import { FormInst, FormItemRule } from 'naive-ui';
-import { fetchRouteList, fetchPermissionList, fetchCreateRole, fetchUpdateRole } from '@/service';
+import { fetchCreatePermission, fetchUpdatePermission } from '@/service';
 import { createRequiredFormRule } from '@/utils';
 import { useBoolean } from '@/hooks';
 
@@ -94,52 +77,22 @@ const title = computed(() => {
 
 const formRef = ref<HTMLElement & FormInst>();
 
-type FormModel = Pick<RoleManagement.Role, 'name' | 'permissionIds' | 'routeIds'>;
+type FormModel = Pick<PermissionManagement.Permission, 'name' | 'desc'>;
 
 const formModel = reactive<FormModel>(createDefaultFormModel());
 
 const rules: Record<keyof FormModel, FormItemRule | FormItemRule[]> = {
-  name: createRequiredFormRule({ message: '请输入角色名' }),
-  permissionIds: createRequiredFormRule({ message: '请选择角色权限', type: 'array' }),
-  routeIds: createRequiredFormRule({ message: '请选择角色路由', type: 'array' })
+  name: createRequiredFormRule({ message: '请输入权限名' }),
+  desc: createRequiredFormRule({ message: '请输入简介' })
 };
-const permissionOption = ref([]);
-const routeOption = ref([]);
+const roleOption = ref([]);
 const { bool: loading, setTrue: startLoading, setFalse: endLoading } = useBoolean();
 
 function createDefaultFormModel(): FormModel {
   return {
     name: null,
-    permissionIds: null,
-    routeIds: null
+    desc: null
   };
-}
-
-/** 获取权限列表 */
-async function getPermissionData() {
-  const { data } = await fetchPermissionList({
-    page: 1,
-    pageSize: 99
-  });
-  if (data) {
-    setPermissionData(data[0]);
-  }
-}
-
-function setPermissionData(data) {
-  permissionOption.value = data;
-}
-
-/** 获取路由列表 */
-async function getRouteData() {
-  const { data } = await fetchRouteList();
-  if (data) {
-    setRouteData(data);
-  }
-}
-
-function setRouteData(data) {
-  routeOption.value = data;
 }
 
 function handleUpdateFormModel(model: Partial<FormModel>) {
@@ -164,8 +117,8 @@ function handleUpdateFormModelByModalType() {
 
 function handleSubmitByModalType() {
   const handles: Record<ModalType, Function> = {
-    add: fetchCreateRole,
-    edit: fetchUpdateRole
+    add: fetchCreatePermission,
+    edit: fetchUpdatePermission
   };
 
   return handles[props.type];
@@ -193,11 +146,4 @@ watch(
     }
   }
 );
-
-function init() {
-  getPermissionData();
-  getRouteData();
-}
-
-init();
 </script>

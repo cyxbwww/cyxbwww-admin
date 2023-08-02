@@ -44,7 +44,7 @@ declare namespace ApiUserManagement {
   }
 }
 
-declare namespace ApiRoleManagment {
+declare namespace ApiRoleManagement {
   interface Role {
     /** 角色id */
     id: string;
@@ -52,5 +52,27 @@ declare namespace ApiRoleManagment {
     name: string | null;
     /** 角色权限 */
     permissionIds: [] | null;
+    /** 角色路由 */
+    routeIds: [] | null;
+  }
+}
+
+declare namespace ApiPermissionManagement {
+  interface Permission {
+    /** 权限id */
+    id: string;
+    /** 权限名称 */
+    name: string | null;
+    /** 简介 */
+    desc: string | null;
+  }
+}
+
+declare namespace ApiRouteManagement {
+  interface Route {
+    /** 路由id */
+    id: string;
+    /** 路由名称 */
+    name: string | null;
   }
 }

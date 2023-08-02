@@ -102,7 +102,7 @@ export const useRouteStore = defineStore('route-store', {
     /** 初始化动态路由 */
     async initDynamicRoute() {
       const { userId } = getUserInfo();
-      const { data } = await fetchUserRoutes(userId);
+      const { data } = await fetchUserRoutes({ userId });
       if (data) {
         this.routeHomeName = data.home;
         this.handleUpdateRootRedirect(data.home);

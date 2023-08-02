@@ -32,7 +32,7 @@
 <script setup lang="tsx">
 import { Ref } from 'vue';
 import { DataTableColumns, PaginationProps } from 'naive-ui';
-import { fetchDeleteRole, fetchRoleList } from '@/service';
+import { fetchDeletePermission, fetchPermissionList } from '@/service';
 import { useBoolean } from '@/hooks';
 import TableActionModal from './components/table-action-modal.vue';
 import type { ModalType } from './components/table-action-modal.vue';
@@ -40,25 +40,22 @@ import type { ModalType } from './components/table-action-modal.vue';
 const { bool: visible, setTrue: openModal } = useBoolean();
 const { bool: loading, setTrue: startLoading, setFalse: endLoading } = useBoolean();
 
-const tableData = ref<RoleManagement.Role[]>([]);
+const tableData = ref<PermissionManagement.Permission[]>([]);
 const columns: Ref<DataTableColumns> = ref([
   {
     key: 'id',
-    title: '角色ID',
+    title: '权限ID',
     align: 'center'
   },
   {
     key: 'name',
-    title: '角色名称',
+    title: '权限名称',
     align: 'center'
   },
   {
-    key: 'permissions',
-    title: '权限',
-    align: 'center',
-    render: row => {
-      return row.permissions.map(v => <NTag class="m-4px">{v.desc}</NTag>);
-    }
+    key: 'desc',
+    title: '简介',
+    align: 'center'
   },
   {
     key: 'actions',
@@ -102,10 +99,10 @@ const params = reactive({
   pageSize: toRef(pagination, 'pageSize')
 });
 
-/** 获取角色列表 */
+/** 获取权限列表 */
 async function getTableData() {
   startLoading();
-  const { data } = await fetchRoleList(params);
+  const { data } = await fetchPermissionList(params);
   if (data) {
     setTableData(data[0]);
     pagination.itemCount = data[1];
@@ -127,8 +124,6 @@ function handleAddTable() {
 async function handleEditTable(id) {
   const findItem = tableData.value.find(v => v.id === id);
   if (findItem) {
-    findItem.permissionIds = findItem.permissions.map(v => v.id);
-    findItem.routeIds = findItem.routes.map(v => v.id);
     setEditData(findItem);
   }
   setModalType('edit');
@@ -136,7 +131,7 @@ async function handleEditTable(id) {
 }
 
 async function handleDeleteTable(id) {
-  const { data } = await fetchDeleteRole({ id });
+  const { data } = await fetchDeletePermission({ id });
   if (data) {
     await getTableData();
   }
@@ -146,9 +141,9 @@ function setTableData(data) {
   tableData.value = data;
 }
 
-const editData = ref<RoleManagement.Role | null>(null);
+const editData = ref<PermissionManagement.Permission | null>(null);
 
-function setEditData(data: RoleManagement.Role | null) {
+function setEditData(data: PermissionManagement.Permission | null) {
   editData.value = data;
 }
 

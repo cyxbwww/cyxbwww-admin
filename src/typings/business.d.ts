@@ -38,7 +38,25 @@ declare namespace UserManagement {
 }
 
 declare namespace RoleManagement {
-  interface Role extends ApiRoleManagment.Role {
+  interface Role extends ApiRoleManagement.Role {
+    /** 序号 */
+    index: number;
+    /** 表格的key（id） */
+    key: string;
+  }
+}
+
+declare namespace PermissionManagement {
+  interface Permission extends ApiPermissionManagement.Permission {
+    /** 序号 */
+    index: number;
+    /** 表格的key（id） */
+    key: string;
+  }
+}
+
+declare namespace RouteManagement {
+  interface Route extends ApiRouteManagement.Route {
     /** 序号 */
     index: number;
     /** 表格的key（id） */
